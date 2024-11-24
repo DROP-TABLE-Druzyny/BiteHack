@@ -1,0 +1,13 @@
+# python files
+venv/
+__pycache__/
+.pytest_cache
+
+# backend tests
+backend/.coverage*
+backend/cov.xml
+backend/cov-report/
+
+# misc
+.vscode
+.git/
