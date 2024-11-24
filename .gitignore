@@ -11,3 +11,4 @@ backend/cov-report/
 # misc
 .vscode
 .git/
+.env
