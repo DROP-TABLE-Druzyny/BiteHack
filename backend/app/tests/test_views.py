@@ -107,6 +107,7 @@ class TestUserViewSet(TestCase):
 
         response = self.client.get(f'{self.url}{user.id}/')
 
+        logger.info(response.data)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.data['username'], 'testuser')
 
