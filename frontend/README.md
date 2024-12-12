@@ -1,11 +1,13 @@
+This is nextjs sandbox. I'm testing different components and learning how to connect pieces together, it's not meant to work.
 
-Installed packages:
+
+Packages to install:
 
 ```bash
 npm install @heroicons/react
 npm install clsx
 npx shadcn@latest init -d
-npx shadcn@latest add form button input textarea
+npx shadcn@latest add form button input textarea chart
 ```
 
 To run the development server:
@@ -19,3 +21,5 @@ pnpm dev
 # or
 bun dev
 ```
+
+If it doesn't work check [this link](https://ui.shadcn.com/docs/react-19#recharts) ("Add the following to your package.json") because it's React 19 and it worked (but it supposedly shouldn't)
