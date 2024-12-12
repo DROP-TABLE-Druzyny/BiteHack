@@ -66,6 +66,11 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+]
+CORS_ALLOW_ALL_ORIGINS = True
+
 ROOT_URLCONF = 'hackaton.urls'
 
 TEMPLATES = [
@@ -127,6 +132,14 @@ SPECTACULAR_SETTINGS = {
     'DESCRIPTION': 'Projekt grupy DROP-TABLE-Druzyny na BiteHack24',
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
+    'SECURITY_DEFINITIONS': {
+        'api_key': {
+            'type': 'apiKey',
+            'in': 'header',
+            'name': 'Authorization'
+        }
+    },
+    "USE_SESSION_AUTH": False,
 }
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),

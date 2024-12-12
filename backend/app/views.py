@@ -3,8 +3,9 @@ import logging
 # django + rest framework imports
 from rest_framework import mixins, viewsets, status
 from rest_framework.response import Response
-from rest_framework.decorators import action, permission_classes, authentication_classes
+from rest_framework.decorators import action, permission_classes as pc, authentication_classes as ac
 from rest_framework.permissions import IsAuthenticated
+from rest_framework_simplejwt.tokens import RefreshToken
 
 # api documentation imports
 from drf_spectacular.utils import extend_schema
@@ -20,7 +21,6 @@ logger = logging.getLogger(__name__)
 
 @extend_schema(tags=['User'])
 class UserViewSet(
-    mixins.CreateModelMixin, 
     mixins.ListModelMixin, 
     mixins.RetrieveModelMixin, 
     viewsets.GenericViewSet):
@@ -29,10 +29,10 @@ class UserViewSet(
     queryset = auth_models.User.objects.all()
     serializer_class = UserSerializer
     lookup_field = 'id'
-    authentication_classes = []
 
-    def create(self, request):
-        """Method to create a new user"""
+    @action(detail=False, methods=['post'], authentication_classes=[], permission_classes=[])
+    def register(self, request):
+        """Register a new user"""
 
         # Authenticated users cannot register
         if request.user.is_authenticated:
@@ -49,7 +49,27 @@ class UserViewSet(
         logger.error("Validation error's occured when creating a new user: %s", serializer.errors)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    @permission_classes([IsAuthenticated])
+    @action(detail=False, methods=['post'])
+    @ac([IsAuthenticated])
+    def logout(self, request):
+        """Logout the current user"""
+
+        # Check if the user is authenticated
+        if not request.user.is_authenticated:
+            return Response(
+                {'detail': 'Authentication credentials were not provided.'},
+                status=status.HTTP_401_UNAUTHORIZED
+            )
+
+        try:
+            refresh_token = request.data["refresh"]
+            token = RefreshToken(refresh_token)
+            token.blacklist()
+            return Response({'detail': 'Successfully logged out.'}, status=status.HTTP_205_RESET_CONTENT)
+        except Exception:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+    @ac([IsAuthenticated])
     def list(self, request):
         """Method to get the current user's information"""
         
@@ -95,9 +115,9 @@ class ProfileViewSet(mixins.ListModelMixin,
     lookup_field = 'id'
     authentication_classes = []
 
-    @permission_classes([IsAuthenticated])
+    @ac([IsAuthenticated])
     def list(self, request):
-        """Method to get the currently authenticated user's profile"""
+        """Method to get the currently authenticated user's profile - needs authentication"""
 
         # Check if the user is authenticated
         if not request.user.is_authenticated:
@@ -119,9 +139,9 @@ class ProfileViewSet(mixins.ListModelMixin,
         serializer = self.get_serializer(profile)
         return Response(serializer.data)
 
-    @permission_classes([IsAuthenticated])
+    @ac([IsAuthenticated])
     def update(self, request, id=None):
-        """Method to update a user's profile"""
+        """Method to update a user's profile - needs authentication"""
 
         # Get the user's profile
         profile = self.get_object()
