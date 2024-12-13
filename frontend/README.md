@@ -7,7 +7,7 @@ Packages to install:
 npm install @heroicons/react
 npm install clsx
 npx shadcn@latest init -d
-npx shadcn@latest add form button input textarea chart
+npx shadcn@latest add form button input textarea chart calendar popover
 ```
 
 To run the development server:

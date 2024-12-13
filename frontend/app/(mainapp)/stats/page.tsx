@@ -44,7 +44,7 @@ export default function Page() {
   return (
     <div className="flex flex-col md:flex-col gap-4 md:overflow-hidden">
       <h1>Stats</h1>
-
+      
       <div className="grid gap-6 md:grid-cols-2">
         <StatsLineChart data={lineChartData} config={lineChartConfig} />
         <StatsLineChart data={lineChartData} config={lineChartConfig} />
