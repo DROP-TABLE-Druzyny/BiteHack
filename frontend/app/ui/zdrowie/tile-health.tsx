@@ -5,13 +5,10 @@ interface TileData {
 
 export default function TileHealth({ tileData }: { tileData: TileData }) {
   return (
-    <div className="flex flex-col border w-full bg-amber-50">
+    <div className="flex flex-col border w-full bg-amber-50 rounded-2xl">
       <div className="flex flex-row items-center justify-between px-7 py-4 w-full text-3xl">
         <div className="min-w-0 mr-2">
           <p className="truncate font-semibold ">{tileData.title}</p>
-          {/* <p className="hidden text-sm text-gray-500 sm:block">
-            {tileData.text}
-          </p> */}
         </div>
       </div>
 
