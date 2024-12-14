@@ -32,3 +32,20 @@ class Profile(models.Model):
             self.bio = self.get_default_bio()
 
         super(Profile, self).save(*args, **kwargs)
+
+class LocalEvent(models.Model):
+    name = models.CharField(max_length=100, blank=False, null=False)
+    description = models.TextField(blank=True, default="Brak dodatkowych informacji o wydarzeniu.")
+    data_start = models.DateTimeField(blank=False, null=False)
+    data_end = models.DateTimeField(blank=False, null=False)
+    latitude = models.FloatField(blank=False, null=False)
+    longitude = models.FloatField(blank=False, null=False)
+
+    # TODO:
+    # liczba zainteresowanych
+    # kategorie wydarzenia
+
+    def __str__(self):
+        """String representation of the LocalEvent model"""
+
+        return str(self.name)

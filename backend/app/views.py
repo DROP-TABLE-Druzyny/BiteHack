@@ -17,6 +17,9 @@ from .serializers import UserSerializer
 from .models import Profile
 from .serializers import ProfileSerializer
 
+from .models import LocalEvent
+from .serializers import LocalEventSerializer
+
 logger = logging.getLogger(__name__)
 
 @extend_schema(tags=['User'])
@@ -152,3 +155,40 @@ class ProfileViewSet(mixins.ListModelMixin,
             return Response(serializer.data)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@extend_schema(tags=['LocalEvent'])
+class LocalEventViewSet(
+    mixins.ListModelMixin,
+    mixins.RetrieveModelMixin,
+    #mixins.CreateModelMixin,
+    viewsets.GenericViewSet):
+    """View for listing and creating local events"""
+    queryset = LocalEvent.objects.all()
+    serializer_class = LocalEventSerializer
+    lookup_field = 'id'
+    authentication_classes = []
+
+    def get_queryset(self):
+        """Method to get the queryset for the LocalEvent model"""
+
+        queryset = LocalEvent.objects.all()
+
+        # TODO: Sort by nearby location
+
+        return queryset
+
+    @ac([])
+    def list(self, request):
+        """Method to list all local events"""
+
+        queryset = self.get_queryset()
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
+    
+    @ac([])
+    def retrieve(self, request, id=None):
+        """Method to get a local event by ID"""
+
+        local_event = self.get_object()
+        serializer = self.get_serializer(local_event)
+        return Response(serializer.data)

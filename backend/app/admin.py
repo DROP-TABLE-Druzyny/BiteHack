@@ -1,3 +1,22 @@
+from rest_framework import serializers
 from django.contrib import admin
+from django.core.exceptions import ValidationError
 
-# Register your models here.
+from .models import LocalEvent
+from .serializers import LocalEventSerializer
+
+@admin.register(LocalEvent)
+class LocalEventAdmin(admin.ModelAdmin):
+    list_display = ['name', 'data_start', 'description']
+    search_fields = ['name', 'description']
+    list_filter = ['data_start', 'data_end']
+    date_hierarchy = 'data_start'
+    ordering = ['data_start',]
+
+    def save_model(self, request, obj, form, change):
+        serializer = LocalEventSerializer(data=form.cleaned_data)
+
+        if serializer.is_valid():
+            serializer.save()
+        else:
+            raise serializers.ValidationError(serializer.errors)
