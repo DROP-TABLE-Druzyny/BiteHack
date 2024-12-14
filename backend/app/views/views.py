@@ -14,13 +14,13 @@ from drf_spectacular.utils import extend_schema
 
 # models and serializers
 from django.contrib.auth import models as auth_models
-from .serializers import UserSerializer
+from ..serializers.serializers import UserSerializer
 
-from .models import Profile
-from .serializers import ProfileSerializer
+from ..models.models import Profile
+from ..serializers.serializers import ProfileSerializer
 
-from .models import LocalEvent
-from .serializers import LocalEventSerializer
+from ..models.models import LocalEvent
+from ..serializers.serializers import LocalEventSerializer
 
 logger = logging.getLogger(__name__)
 
@@ -175,15 +175,20 @@ class LocalEventViewSet(
 
         queryset = self.queryset
 
+
         # sort by distance if longitude and latitude are provided
         longitude = self.request.query_params.get('longitude', None)
         latitude = self.request.query_params.get('latitude', None)
+
         if longitude is not None and latitude is not None:
             if not (-90 <= float(latitude) <= 90) or not (-180 <= float(longitude) <= 180):
                 return queryset
-            
             user_location = (float(longitude), float(latitude))
-            queryset = sorted(queryset, key=lambda event: great_circle(user_location, (event.longitude, event.latitude)).meters)
+            queryset = list(queryset)
+            for event in queryset:
+                event.distance = great_circle(user_location, (event.longitude, event.latitude)).meters
+
+            queryset.sort(key=lambda event: event.distance)
 
         # TODO: filter by type if provided
 
@@ -195,8 +200,15 @@ class LocalEventViewSet(
 
         queryset = self.get_queryset()
         serializer = self.get_serializer(queryset, many=True)
-        return Response(serializer.data)
-    
+        data = serializer.data
+
+        # Add the extra field 'distance' to the response data if it exists
+        for event, data_event in zip(queryset, data):
+            if hasattr(event, 'distance'):
+                data_event['distance'] = event.distance
+
+        return Response(data)
+
     @ac([])
     def retrieve(self, request, id=None):
         """Method to get a local event by ID"""

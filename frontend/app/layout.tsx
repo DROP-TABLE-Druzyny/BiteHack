@@ -3,6 +3,7 @@ import '@/app/ui/global.css';
 import { inter } from '@/app/ui/fonts';
 
 import localFont from "next/font/local";
+import { AuthProvider } from "@/context/AuthContext";
 // const geistSans = localFont({
 //   src: "./fonts/GeistVF.woff",
 //   variable: "--font-geist-sans",
@@ -29,7 +30,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en' suppressHydrationWarning>
-      <body className={`${inter.className} antialiased `}>{children}</body>
+      <body className={`${inter.className} antialiased `}>
+        <AuthProvider>
+          {children}
+        </AuthProvider>
+      </body>
     </html>
   );
 }

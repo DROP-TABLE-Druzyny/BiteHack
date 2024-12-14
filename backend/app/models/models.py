@@ -1,3 +1,4 @@
+# django imports
 from django.db import models
 from django.contrib.auth import models as auth_models
 
@@ -51,6 +52,7 @@ class LocalEvent(models.Model):
 
     # TODO:
     # liczba zainteresowanych
+    # informacje o dostępności wydarzenia
 
     def __str__(self):
         """String representation of the LocalEvent model"""

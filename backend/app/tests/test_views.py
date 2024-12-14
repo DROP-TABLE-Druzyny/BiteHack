@@ -4,7 +4,7 @@ from django.urls import reverse
 from rest_framework.test import APIClient
 
 from django.contrib.auth.models import User
-from app.models import Profile
+from backend.app.models.models import Profile
 
 logger = logging.getLogger(__name__)
 
