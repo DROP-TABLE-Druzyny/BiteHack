@@ -106,6 +106,12 @@ class ClientViewSet(
                 {'detail': 'Phone number is required.'},
                 status=status.HTTP_400_BAD_REQUEST
             )
+        
+        if Client.objects.filter(phone=phone_number).exists():
+            return Response(
+                {'detail': 'Phone number is already in use.'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
 
         serializer = ClientModelSerializer(data=request.data)
         if serializer.is_valid():
@@ -125,7 +131,9 @@ class ClientViewSet(
                 status=status.HTTP_401_UNAUTHORIZED
             )
 
-        return super().update(request, *args, **kwargs)
+        super().update(request, *args, **kwargs)
+
+        return Response({'detail': 'Client information updated.'}, status=status.HTTP_200_OK)
 
     @extend_schema(responses={200: {'type': 'object', 'properties': {'access_token': {'type': 'string'}}}})
     @action(detail=True, methods=['post'])

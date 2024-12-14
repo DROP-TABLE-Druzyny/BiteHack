@@ -10,7 +10,7 @@ export interface IPublicService {
     getLocalEvents(latitude?: number, longitude?: number): Promise<Event[]>;
 }
 
-export class DjangoService extends ApiService implements IPublicService {
+export class PublicDjangoService extends ApiService implements IPublicService {
     constructor() {
         const axiosInstance = axios.create({
             baseURL: 'http://192.168.1.148:8000/api/',
@@ -49,11 +49,9 @@ export class DjangoService extends ApiService implements IPublicService {
     public async refreshToken(token: string): Promise<{ access: string }> {
         return this.post<{ access: string }, { refresh: string }>('token/refresh/', { refresh: token });
     }
-
     public async register(username: string, password: string, email: string): Promise<void> {
         return this.post<void, { username: string, password: string, email: string }>('user/register/', { username, password, email });
     }
-
     public async login(username: string, password: string): Promise<{ access: string, refresh: string }> {
         const response = await this.post<{ access: string, refresh: string }, { username: string, password: string }>('login/', { username, password });
 
@@ -62,7 +60,6 @@ export class DjangoService extends ApiService implements IPublicService {
 
         return response;
     }
-
     public async logout(): Promise<void> {
         const response = await this.post<void, {}>('user/logout/', { refresh: localStorage.getItem("refresh_token") });
 

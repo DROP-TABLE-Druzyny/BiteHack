@@ -1,3 +1,12 @@
-import { DjangoService } from "./PublicService";
+// Public Service
+import { 
+    PublicDjangoService
+} from "./PublicService";
 
-export const publicService = new DjangoService();
+// Client Service
+import {
+    ClientDjangoService
+} from './ClientService';
+
+export const publicService = new PublicDjangoService();
+export const clientService = new ClientDjangoService();
