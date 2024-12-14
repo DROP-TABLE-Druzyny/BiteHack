@@ -1,6 +1,7 @@
 import Image from "next/image";
 import SideNavEvents from "@/app/ui/sidenav-events";
 import EventSidenav from "@/app/ui/aktywnosc/event-sidenav";
+import EventsDisplayer from "@/app/ui/aktywnosc/events-displayer";
 
 export default function Page() {
   const userData = {
@@ -18,11 +19,7 @@ export default function Page() {
     <div className="flex h-screen flex-col md:flex-row md:overflow-hidden">
           <div className="w-full flex-none md:w-96">
             <SideNavEvents>
-              <div>
-              <EventSidenav/>
-              <EventSidenav/>
-              <EventSidenav/>
-              </div>
+              <EventsDisplayer></EventsDisplayer>
             </SideNavEvents>
           </div>
           <div className="flex-grow p-4 md:overflow-y-auto md:p-8">
