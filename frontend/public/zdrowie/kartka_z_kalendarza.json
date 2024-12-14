@@ -1,10 +1,10 @@
 [
     {
         "date": "01.01",
-        "health_advise": "30 minut spaceru dziennie zmniejsza ryzyko zawału o 25%.",
-        "healthy_meal": "Jogurt naturalny z owocami i orzechami.",
-        "trivia": "Na noworocznych obyczajach w Szkocji spożywa się haggis.",
-        "joke": "Dlaczego matematyka jest smutna? Bo ma za dużo problemów."
+        "health_advise": "Jedzenie ryb poprawia zdrowie serca.",
+        "healthy_meal": "Grillowany łosoś z warzywami.",
+        "trivia": "Największa pustynia na świecie to Sahara.",
+        "joke": "Dlaczego komputer nie lubi kurzu? Bo nie chce się zapchać."
     },
     {
         "date": "02.01",
@@ -309,10 +309,10 @@
     },
     {
         "date": "15.12",
-        "health_advise": "Jedzenie ryb poprawia zdrowie serca.",
-        "healthy_meal": "Grillowany łosoś z warzywami.",
-        "trivia": "Największa pustynia na świecie to Sahara.",
-        "joke": "Dlaczego komputer nie lubi kurzu? Bo nie chce się zapchać."
+        "health_advise": "30 minut spaceru dziennie zmniejsza ryzyko zawału o 25%.",
+        "healthy_meal": "Jogurt naturalny z owocami i orzechami.",
+        "trivia": "Na noworocznych obyczajach w Szkocji spożywa się haggis.",
+        "joke": "Dlaczego matematyka jest smutna? Bo ma za dużo problemów."
     },
     {
         "date": "16.12",
