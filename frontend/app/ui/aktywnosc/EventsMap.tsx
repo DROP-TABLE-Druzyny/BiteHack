@@ -59,7 +59,7 @@ export default function EventsMap() {
             const customIcon = createCustomIcon({icon: eventIconMap[event.type]});
 
             return (
-                <Marker key={event.id} position={event.position} icon={customIcon}>
+                <Marker key={event.id} position={[event.latitude, event.longitude]} icon={customIcon}>
                     <Popup>{event.name}</Popup>
                 </Marker>
             );

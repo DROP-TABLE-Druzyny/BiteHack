@@ -12,41 +12,28 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Event, eventIconMap } from "@/services/Events";
+import { useMapContext } from "@/context/MapContext";
 
 export default function EventsDisplayer() {
-  const events = [
-    {
-      id: 1,
-      name: "Spotkanie seniorów",
-      date: "2024-05-20",
-      distance: 0.5,
-      organizer: "Firma xyz",
-    },
-    {
-      id: 2,
-      name: "Spacer po parku",
-      date: "2024-06-15",
-      distance: 1,
-      organizer: "Burmistrz gminy Kęty",
-    },
-    {
-      id: 3,
-      name: "Piknik rodzinny",
-      date: "2024-07-10",
-      distance: 2,
-      organizer: "Jan Kowalski",
-    },
-  ];
+  const {events, loading} = useMapContext();
 
-  const handleAccordionClick = (event: {
-    name: any;
-    date?: string;
-    distance?: number;
-    organizer?: string;
-  }) => {
+  if (loading)
+  {
+    return (
+      <div>
+        Loading
+      </div>
+    )
+  }
+
+  const handleAccordionClick = (event: Event
+  ) => {
     console.log(`Show location on map for event: ${event.name}`);
     // Future implementation to show location on map
   };
+  
+  
 
   return (
     <Accordion className="" type="single" collapsible>
@@ -54,21 +41,24 @@ export default function EventsDisplayer() {
         <AccordionItem
           key={event.id}
           value={`item-${event.id}`}
-          className="hover:bg-gray-200  rounded-lg"
+          className="hover:bg-gray-200 rounded-lg p-4"
         >
           <AccordionTrigger onClick={() => handleAccordionClick(event)}>
             <div className="text-lg font-semibold">
-              <p className="text-2xl font-semibold mb-1">{event.name}</p>
-              <div>
-                <p>Date: {event.date}</p>
-                <p>Distance: {event.distance} km</p>
+              <div className="flex gap-2 items-center">
+                <p className="text-2xl font-semibold mb-1">{event.name}</p>
+                {eventIconMap[event.type]}
+              </div>
+              
+              <div className="text-gray-700 font-extralight">
+                <p>Start: {(new Date(event.data_start)).toLocaleDateString()}</p>
+                {/*<p>Distance: {event.distance} km</p>*/}
               </div>
             </div>
           </AccordionTrigger>
           <AccordionContent>
             <div className="text-lg">
-              <p>Organizer: {event.organizer}</p>
-              <p>Additional details...</p>
+              <p>{event.description}</p>
             </div>
           </AccordionContent>
         </AccordionItem>
