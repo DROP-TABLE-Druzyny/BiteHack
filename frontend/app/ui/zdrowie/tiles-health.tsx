@@ -37,7 +37,7 @@ export  default async function TilesHealth() {
 
 
   return (
-    <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+    <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
       <TileHealth
         tileData={{
           title: `${dayOfWeek} ${formattedDate}`,
