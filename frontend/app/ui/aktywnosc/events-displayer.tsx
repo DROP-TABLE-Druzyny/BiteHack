@@ -1,12 +1,10 @@
-'use client';
+"use client";
 
-import {
-  MapPinIcon,
-} from '@heroicons/react/24/outline';
+import { MapPinIcon } from "@heroicons/react/24/outline";
 
-import clsx from 'clsx';
-import { Button } from '@/components/ui/button';
-import EventSidenav from './event-sidenav';
+import clsx from "clsx";
+import { Button } from "@/components/ui/button";
+import EventSidenav from "./event-sidenav";
 
 import {
   Accordion,
@@ -40,7 +38,12 @@ export default function EventsDisplayer() {
     },
   ];
 
-  const handleAccordionClick = (event: { name: any; date?: string; distance?: number; organizer?: string; }) => {
+  const handleAccordionClick = (event: {
+    name: any;
+    date?: string;
+    distance?: number;
+    organizer?: string;
+  }) => {
     console.log(`Show location on map for event: ${event.name}`);
     // Future implementation to show location on map
   };
@@ -48,7 +51,11 @@ export default function EventsDisplayer() {
   return (
     <Accordion className="" type="single" collapsible>
       {events.map((event) => (
-        <AccordionItem key={event.id} value={`item-${event.id}`} className='hover:bg-gray-200  rounded-lg'>
+        <AccordionItem
+          key={event.id}
+          value={`item-${event.id}`}
+          className="hover:bg-gray-200  rounded-lg"
+        >
           <AccordionTrigger onClick={() => handleAccordionClick(event)}>
             <div className="text-lg font-semibold">
               <p className="text-2xl font-semibold mb-1">{event.name}</p>
@@ -56,7 +63,6 @@ export default function EventsDisplayer() {
                 <p>Date: {event.date}</p>
                 <p>Distance: {event.distance} km</p>
               </div>
-              
             </div>
           </AccordionTrigger>
           <AccordionContent>
