@@ -23,6 +23,7 @@ export function FetchDomains(query: string)
     let resultsByKeyword: SearchItem[] = [];
 
     wellKnownDomains.forEach(element => {
+        console.log("Doing element" + element.title)
         if (element.title.toLowerCase().includes(query))
         {
             results.push(element);
@@ -30,14 +31,12 @@ export function FetchDomains(query: string)
         else
         {
             // Search keywords
-            element.categories.forEach(keyword =>
-            {
-                if (keyword.toLowerCase().includes(query)) 
-                {
+            for (const keyword of element.categories) {
+                if (keyword.toLowerCase().includes(query)) {
                     resultsByKeyword.push(element);
-                    return; 
+                    break;
                 }
-            });
+            }
         }
     });
 

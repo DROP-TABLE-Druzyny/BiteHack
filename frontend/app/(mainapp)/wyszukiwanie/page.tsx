@@ -17,6 +17,7 @@ export default function Page() {
 
     try {
       const results = FetchDomains(query);
+      console.log("Fetching...")
       setSearchItems(results);
     } catch (error) {
       console.error("Error fetching search items:", error);
@@ -28,10 +29,12 @@ export default function Page() {
 
   return (
     <div 
-    className={`mx-[10%] flex flex-col items-center justify-center ${!showResults ? 'h-screen' : ''}`}
+      className={`mx-[10%] flex flex-col justify-center`}
     >
-      <div className='w-full flex flex-col'>
-        <span className='text-center justify-center text-4xl'>Wyszukaj</span>
+      <div className={`w-full flex flex-col transition-all duration-500 ease-in-out ${
+        showResults ? 'mt-8' : 'mt-[25%]'
+      }`}>
+        <span className='text-center justify-center text-4xl mb-8 font-extrabold'>Wyszukaj</span>
         <Input 
             onInput={SearchItem} 
             className='lg:2text-xl md:text-2xl sm:text-lg w-full h-12 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'
@@ -39,9 +42,6 @@ export default function Page() {
       </div>
       {showResults &&
         <div className='search-results mt-6'>
-          <p>
-            twoje wyniki
-          </p>
           {searchItems.map((item, index) => (
             <SearchResult item={item} key={index}/>
           ))}
