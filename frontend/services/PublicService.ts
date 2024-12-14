@@ -1,13 +1,25 @@
 import axios from 'axios';
 import { ApiService } from './ApiService';
+import { HelpRequest } from './HelpRequest';
 import { isTokenExpired } from '../lib/utils';
 import { Event } from './Events';
+
+type getHelpRequestsParameters = {
+    completed?: boolean;
+    accepted?: boolean;
+    accepted_by?: number;
+}
 
 export interface IPublicService {
     refreshToken(token: string): Promise<{ access: string }>;
     register(username: string, password: string, email: string): Promise<void>;
     login(username: string, password: string): Promise<{ access: string, refresh: string }>;
     getLocalEvents(latitude?: number, longitude?: number): Promise<Event[]>;
+    getHelpRequests(parameters: getHelpRequestsParameters): Promise<HelpRequest[]>;
+    retrieveHelpRequest(id: number): Promise<HelpRequest>;
+    patchHelpRequest(id: number, data: Partial<HelpRequest>): Promise<void>;
+    createHelpRequest(data: HelpRequest): Promise<HelpRequest>;
+    completeHelpRequest(id: number): Promise<void>;
 }
 
 export class PublicDjangoService extends ApiService implements IPublicService {
@@ -71,5 +83,20 @@ export class PublicDjangoService extends ApiService implements IPublicService {
     public async getLocalEvents(latitude?: number, longitude?: number): Promise<Event[]> {
         const params = { latitude, longitude };
         return this.get<Event[]>('event/', params);
+    }
+    public async getHelpRequests(parameters: getHelpRequestsParameters): Promise<HelpRequest[]> {
+        return this.get<HelpRequest[]>('help-request/', parameters);
+    }
+    public async retrieveHelpRequest(id: number): Promise<HelpRequest> {
+        return this.get<HelpRequest>(`help-request/${id}/`);
+    }
+    public async patchHelpRequest(id: number, data: Partial<HelpRequest>): Promise<void> {
+        return this.patch<void, Partial<HelpRequest>>(`help-request/${id}/`, data);
+    }
+    public async createHelpRequest(data: HelpRequest): Promise<HelpRequest> {
+        return this.post<HelpRequest, HelpRequest>('help-request/', data);
+    }
+    public async completeHelpRequest(id: number): Promise<void> {
+        return this.patch<void, {}>(`help-request/${id}/complete/`, {});
     }
 }
