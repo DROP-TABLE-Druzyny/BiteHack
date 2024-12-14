@@ -1,5 +1,3 @@
-import Image from "next/image";
-import UserActivity from "@/app/ui/activity/user_activity";
 import TilesHealth from "@/app/ui/zdrowie/tiles-health";
 
 export default function Page() {
