@@ -18,6 +18,17 @@ from ..serializers.client_serializers import ClientModelSerializer
 
 logger = logging.getLogger(__name__)
 
+def check_auth(self, request):
+    """Check if the given token links to a valid client account"""
+
+    try:
+        token = request.headers['Authorization'].split()[1]
+    except (KeyError, IndexError):
+        return False
+
+    client = Client.objects.filter(access_token=token).first()
+    return client
+
 @extend_schema(tags=['Client'])
 class ClientViewSet(
     viewsets.GenericViewSet
@@ -31,26 +42,21 @@ class ClientViewSet(
 
     def _generate_random_code(length=6):
         return ''.join(random.choices(string.ascii_letters + string.digits, k=length))
-
-    def _check_auth(self, request):
-        """Check if the given token links to a valid client account"""
-
-        try:
-            token = request.headers['Authorization'].split()[1]
-        except (KeyError, IndexError):
-            return False
-
-        client = Client.objects.filter(access_token=token).first()
-        return client
+    
+    def _check_random_code(code):
+        # temporary code
+        return code == '123456'
+    
+        #TODO: Check if the code is valid and if it's linked to the given phone number
 
     @extend_schema(
         responses={200: {'type': 'object', 'properties': {'code': {'type': 'string'}}}},
     )
     @action(detail=False, methods=['post'], authentication_classes=[], permission_classes=[])
-    def new(self, request):
-        """Begin the registration process for a new client"""
+    def code(self, request):
+        """Send a random authorization code to the given phone number"""
 
-        client = self._check_auth(request)
+        client = check_auth(request)
         if client:
             return Response(
                 {'detail': 'Already authenticated.'},
@@ -84,6 +90,15 @@ class ClientViewSet(
                 {'detail': 'Code is required.'},
                 status=status.HTTP_400_BAD_REQUEST
             )
+        
+        # TODO: Check if the code is valid and if it's linked to the given phone number
+
+        # Temporary code
+        if not self._check_random_code(random_code):
+            return Response(
+                {'detail': 'Invalid code.'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
 
         phone_number = request.data.get('phone', None)
         if not phone_number:
@@ -103,7 +118,7 @@ class ClientViewSet(
     def update(self, request, *args, **kwargs):
         """Update the client's information"""
 
-        client = self._check_auth(request)
+        client = check_auth(request)
         if not client:
             return Response(
                 {'detail': 'Authentication credentials were not provided.'},
@@ -111,3 +126,40 @@ class ClientViewSet(
             )
 
         return super().update(request, *args, **kwargs)
+
+    @extend_schema(responses={200: {'type': 'object', 'properties': {'access_token': {'type': 'string'}}}})
+    @action(detail=True, methods=['post'])
+    def login(self, request, phone=None):
+        """Login the client"""
+
+        client = check_auth(request)
+        if client:
+            return Response(
+                {'detail': 'Already authenticated.'},
+                status=status.HTTP_403_FORBIDDEN
+            )
+
+        random_code = request.data.get('code', None)
+        if not random_code:
+            return Response(
+                {'detail': 'Code is required.'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+        if not self._check_random_code(random_code):
+            return Response(
+                {'detail': 'Invalid code.'},
+                status=status.HTTP_400_BAD_REQUEST
+            ) 
+
+        try:
+            user = Client.objects.get(phone=phone)
+            return Response(
+                {'access_token': user.access_token},
+                status=status.HTTP_200_OK
+            )
+        except Client.DoesNotExist:
+            return Response(
+                {'detail': 'Invalid phone number.'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
