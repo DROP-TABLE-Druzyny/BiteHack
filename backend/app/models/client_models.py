@@ -2,6 +2,7 @@
 import uuid
 from phone_field import PhoneField
 # django imports
+from django.contrib.auth import models as auth_models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.utils import timezone
 from django.db import models
@@ -58,10 +59,7 @@ class Client(AbstractBaseUser):
 
         super(Client, self).save(*args, **kwargs)
 
-class HelpRequest(models.Model):
-    def _default_expiration():
-        return timezone.now() + timezone.timedelta(hours=3)    
-
+class HelpRequest(models.Model): 
     TYPE_CHOICES = [
         ("SHOPPING", "Zakupy"),
         ("MEDICAL", "Pomoc medyczna"),
@@ -73,8 +71,10 @@ class HelpRequest(models.Model):
 
     author = models.ForeignKey(Client, on_delete=models.CASCADE)
     description = models.TextField(blank=True, default="Brak dodatkowych informacji o prośbie o pomoc.")
-    created = models.DateTimeField(auto_now_add=True)
-    expiration = models.DateTimeField(blank=True, null=False, default=_default_expiration)
+    created = models.DateTimeField(auto_now=True)
+    expiration = models.DateTimeField(blank=False, null=False)
     latitude = models.FloatField(blank=False, null=False)
     longitude = models.FloatField(blank=False, null=False)
     type = models.CharField(max_length=64, choices=TYPE_CHOICES, default="OTHER", blank=False)
+    accepted_by = models.ForeignKey(auth_models.User, on_delete=models.CASCADE, blank=True, null=True, related_name='accepted_by')
+    completed = models.BooleanField(default=False)
