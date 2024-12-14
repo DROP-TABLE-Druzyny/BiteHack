@@ -171,3 +171,19 @@ class ClientViewSet(
                 {'detail': 'Invalid phone number.'},
                 status=status.HTTP_400_BAD_REQUEST
             )
+    
+    @action(detail=False, methods=['get'], authentication_classes=[], permission_classes=[])
+    def authenticated(self, request):
+        """Check if the user is authenticated"""
+
+        client = check_auth(request)
+        if client:
+            return Response(
+                {'detail': 'Authenticated.'},
+                status=status.HTTP_200_OK
+            )
+
+        return Response(
+            {'detail': 'Not authenticated.'},
+            status=status.HTTP_401_UNAUTHORIZED
+        )

@@ -58,17 +58,3 @@ class LocalEvent(models.Model):
         """String representation of the LocalEvent model"""
 
         return str(self.name)
-
-class HelpRequest(models.Model):
-    TYPE_CHOICES = [
-        ("SHOPPING", "Zakupy"),
-        ("WALK", "Spacer"),
-        ("OTHER", "Inne")
-    ]
-
-    author = models.ForeignKey(auth_models.User, on_delete=models.CASCADE)
-    description = models.TextField(blank=True, default="Brak dodatkowych informacji o prośbie o pomoc.")
-    date = models.DateTimeField(blank=False, null=False)
-    latitude = models.FloatField(blank=False, null=False)
-    longitude = models.FloatField(blank=False, null=False)
-    type = models.CharField(max_length=64, choices=TYPE_CHOICES, default="OTHER", blank=False)
