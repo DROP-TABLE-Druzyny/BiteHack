@@ -12,6 +12,12 @@ import clsx from 'clsx';
 
 // Map of links to display in the side navigation.
 const links = [
+  { name: 'Aktywność', 
+    href: '/aktywnosc', 
+    icon: HomeIcon },
+  { name: 'Zdrowie', 
+    href: '/zdrowie', 
+    icon: HomeIcon },
   { name: 'Activity', 
     href: '/activity', 
     icon: HomeIcon },
