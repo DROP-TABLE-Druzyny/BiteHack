@@ -11,16 +11,18 @@ interface MapContextType {
   localization: number[];
   setLocalization: React.Dispatch<React.SetStateAction<number[]>>;
   loading: boolean;
+  focusedEvent: Event | null;
+  setFocusedEvent: React.Dispatch<React.SetStateAction<Event | null>>;
 }
 
 const MapContext = createContext<MapContextType | undefined>(undefined);
 
 export const MapProvider = ({ children }: { children: React.ReactNode }) => {
   const [events, setEvents] = useState<Event[]>([]);
-
   const [localization, setLocalization] = useState<number[]>([]);
-
   const [loading, setLoading] = useState<boolean>(true);
+
+  const [focusedEvent, setFocusedEvent] = useState<Event | null>(null)
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -69,6 +71,8 @@ export const MapProvider = ({ children }: { children: React.ReactNode }) => {
     localization,
     setLocalization,
     loading,
+    focusedEvent,
+    setFocusedEvent,
   }
 
   return (

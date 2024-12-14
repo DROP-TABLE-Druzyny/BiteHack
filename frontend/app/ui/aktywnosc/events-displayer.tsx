@@ -16,7 +16,7 @@ import { Event, eventIconMap } from "@/services/Events";
 import { useMapContext } from "@/context/MapContext";
 
 export default function EventsDisplayer() {
-  const {events, loading} = useMapContext();
+  const {events, loading, setFocusedEvent} = useMapContext();
 
   if (loading)
   {
@@ -29,8 +29,7 @@ export default function EventsDisplayer() {
 
   const handleAccordionClick = (event: Event
   ) => {
-    console.log(`Show location on map for event: ${event.name}`);
-    // Future implementation to show location on map
+    setFocusedEvent(event)
   };
   
   
