@@ -18,7 +18,7 @@ from ..serializers.client_serializers import ClientModelSerializer
 
 logger = logging.getLogger(__name__)
 
-def check_auth(self, request):
+def check_auth(request):
     """Check if the given token links to a valid client account"""
 
     try:
@@ -41,9 +41,9 @@ class ClientViewSet(
     authentication_classes = []
 
     def _generate_random_code(length=6):
-        return ''.join(random.choices(string.ascii_letters + string.digits, k=length))
+        return '123456'
     
-    def _check_random_code(code):
+    def _check_random_code(self, code):
         # temporary code
         return code == '123456'
     
@@ -148,6 +148,7 @@ class ClientViewSet(
             )
 
         random_code = request.data.get('code', None)
+        print(random_code)
         if not random_code:
             return Response(
                 {'detail': 'Code is required.'},
