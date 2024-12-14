@@ -1,4 +1,6 @@
 import Image from "next/image";
+import UserActivity from "@/app/ui/activity/user_activity";
+import EventsMap from "@/app/ui/activity/EventsMap";
 import SideNavEvents from "@/app/ui/sidenav-events";
 import EventSidenav from "@/app/ui/aktywnosc/event-sidenav";
 import EventsDisplayer from "@/app/ui/aktywnosc/events-displayer";
@@ -24,7 +26,7 @@ export default function Page() {
           </div>
           <div className="flex-grow p-4 md:overflow-y-auto md:p-8">
             <div className="flex flex-col md:flex-col gap-4 md:overflow-hidden">
-              
+              <EventsMap/>
             </div>
           </div>
       </div>
