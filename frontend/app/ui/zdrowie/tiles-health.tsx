@@ -57,6 +57,4 @@ export default function TilesHealth() {
     </div>
   );
 }
-// Pobieranie z pliku ciekaowstek (losowo)
-// Przycisk do pobrania wiadomosci
-// Pobieranie pogody
+

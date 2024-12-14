@@ -4,6 +4,8 @@ import {
   UserGroupIcon,
   HomeIcon,
   DocumentDuplicateIcon,
+  HeartIcon,
+  
 } from '@heroicons/react/24/outline';
 
 import Link from 'next/link';
@@ -14,10 +16,10 @@ import clsx from 'clsx';
 const links = [
   { name: 'Aktywność', 
     href: '/aktywnosc', 
-    icon: HomeIcon },
+    icon: UserGroupIcon },
   { name: 'Zdrowie', 
     href: '/zdrowie', 
-    icon: HomeIcon },
+    icon: HeartIcon },
   { name: 'Activity', 
     href: '/activity', 
     icon: HomeIcon },
