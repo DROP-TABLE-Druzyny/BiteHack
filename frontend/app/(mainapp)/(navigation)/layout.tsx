@@ -3,7 +3,7 @@ import '@/app/ui/global.css';
 import { inter } from '@/app/ui/fonts';
 
 import localFont from "next/font/local";
-import SideNav from "@/app/ui/sidenav";
+import SideNavMain from "@/app/ui/sidenav-main";
 // const geistSans = localFont({
 //   src: "./fonts/GeistVF.woff",
 //   variable: "--font-geist-sans",
@@ -32,8 +32,8 @@ export default function Layout({
   return  (
     <span lang='en' suppressHydrationWarning>
     <div className="flex h-screen flex-col md:flex-row md:overflow-hidden">
-      <div className="w-full flex-none md:w-64">
-        <SideNav />
+      <div className="w-full flex-none md:w-72">
+        <SideNavMain />
       </div>
       <div className="flex-grow p-6 md:overflow-y-auto md:p-10">{children}</div>
     </div>
