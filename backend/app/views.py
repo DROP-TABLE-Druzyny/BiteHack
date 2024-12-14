@@ -1,4 +1,6 @@
+# misc imports
 import logging
+from geopy.distance import great_circle
 
 # django + rest framework imports
 from rest_framework import mixins, viewsets, status
@@ -171,9 +173,19 @@ class LocalEventViewSet(
     def get_queryset(self):
         """Method to get the queryset for the LocalEvent model"""
 
-        queryset = LocalEvent.objects.all()
+        queryset = self.queryset
 
-        # TODO: Sort by nearby location
+        # sort by distance if longitude and latitude are provided
+        longitude = self.request.query_params.get('longitude', None)
+        latitude = self.request.query_params.get('latitude', None)
+        if longitude is not None and latitude is not None:
+            if not (-90 <= float(latitude) <= 90) or not (-180 <= float(longitude) <= 180):
+                return queryset
+            
+            user_location = (float(longitude), float(latitude))
+            queryset = sorted(queryset, key=lambda event: great_circle(user_location, (event.longitude, event.latitude)).meters)
+
+        # TODO: filter by type if provided
 
         return queryset
 
