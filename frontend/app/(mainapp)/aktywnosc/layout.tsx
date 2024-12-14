@@ -3,19 +3,9 @@ import '@/app/ui/global.css';
 import { inter } from '@/app/ui/fonts';
 
 import localFont from "next/font/local";
-import SideNav from "@/app/ui/sidenav";
 import SideNavEvents from "@/app/ui/sidenav-events";
+
 import { MapProvider } from "@/context/MapContext";
-// const geistSans = localFont({
-//   src: "./fonts/GeistVF.woff",
-//   variable: "--font-geist-sans",
-//   weight: "100 900",
-// });
-// const geistMono = localFont({
-//   src: "./fonts/GeistMonoVF.woff",
-//   variable: "--font-geist-mono",
-//   weight: "100 900",
-// });
 
 export const metadata: Metadata = {
   title: {
