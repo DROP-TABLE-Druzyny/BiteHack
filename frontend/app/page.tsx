@@ -10,7 +10,7 @@ export default function Page() {
         </h1>
         <Navigation></Navigation>
       </main>
-      <a href="login" className="absolute bottom-4 start-1/2 -translate-x-1/2 px-4 py-1 bg-amber-600 border-2 border-white rounded-full shadow-lg text-md text-white drop-shadow-md hover:bg-amber-600 transition duration-300 ease-in-out transform hover:scale-105">
+      <a href="/wolontariusz" className="absolute bottom-4 start-1/2 -translate-x-1/2 px-4 py-1 bg-amber-600 border-2 border-white rounded-full shadow-lg text-md text-white drop-shadow-md hover:bg-amber-600 transition duration-300 ease-in-out transform hover:scale-105">
           Jesteś wolontariuszem?
         </a>
     </div>
