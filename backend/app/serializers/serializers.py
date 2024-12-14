@@ -4,8 +4,8 @@ from django.contrib.auth import models as auth_models
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
 
-from .models import Profile
-from .models import LocalEvent
+from ..models.models import Profile
+from ..models.models import LocalEvent
 
 logger = logging.getLogger(__name__)
 
