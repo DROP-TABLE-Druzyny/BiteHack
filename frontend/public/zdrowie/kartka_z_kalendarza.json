@@ -4,14 +4,14 @@
         "health_advise": "Jedzenie ryb poprawia zdrowie serca.",
         "healthy_meal": "Grillowany łosoś z warzywami.",
         "trivia": "Największa pustynia na świecie to Sahara.",
-        "joke": "Dlaczego komputer nie lubi kurzu? Bo nie chce się zapchać."
+        "joke": "Dlaczego słoń nie używa komputera? Bo boi się myszy!"
     },
     {
         "date": "02.01",
         "health_advise": "Regularne picie wody poprawia metabolizm.",
         "healthy_meal": "Marchewki pieczone z miodem i tymiankiem.",
         "trivia": "Kolibry są jedynymi ptakami, które potrafią latać do tyłu.",
-        "joke": "Czym różni się pociąg od zegarka? Pociąg staje na dworcach, a zegarek na rękach."
+        "joke": "Dlaczego pająk nie chodzi do szkoły? Bo już zna wszystkie sieci!"
     },
     {
         "date": "03.01",
@@ -39,7 +39,7 @@
         "health_advise": "Unikaj smażonego jedzenia dla zdrowia serca.",
         "healthy_meal": "Sałatka z rukoli, gruszki i sera pleśniowego.",
         "trivia": "Najstarsze wino świata znaleziono w Gruzji (6000 lat).",
-        "joke": "Czemu zegar nie mówi? Bo czas leci!"
+        "joke": "Dlaczego zegar nie mówi? Bo czas leci!"
     },
     {
         "date": "07.01",
@@ -53,7 +53,7 @@
         "health_advise": "Herbata zielona zmniejsza ryzyko chorób serca o 10%.",
         "healthy_meal": "Owsianka z bananem i nasionami chia.",
         "trivia": "W starożytnym Rzymie kalendarz miał tylko 10 miesięcy.",
-        "joke": "Czemu parasol nie lubi słońca? Bo woli być w cieniu."
+        "joke": "Dlaczego parasol nie lubi słońca? Bo woli być w cieniu."
     },
     {
         "date": "09.01",
@@ -88,7 +88,7 @@
         "health_advise": "Spożycie ryb 2 razy w tygodniu zmniejsza ryzyko udaru mózgu.",
         "healthy_meal": "Kanapki z łososiem i twarożkiem.",
         "trivia": "Najkrótszy dzień w Polsce trwa około 6 godzin.",
-        "joke": "Czemu krowa nie tańczy? Bo woli spokojne pastwisko."
+        "joke": "Dlaczego krowa nie tańczy? Bo woli spokojne pastwisko."
     },
     {
         "date": "14.01",
@@ -123,14 +123,14 @@
         "health_advise": "Badanie: Ruch poprawia jakość snu.",
         "healthy_meal": "Mus z mango i jogurtu.",
         "trivia": "Równik to najdłuższa linia na powierzchni Ziemi.",
-        "joke": "Co mówi komputer do klawiatury? 'Bez ciebie jestem bezradny.'"
+        "joke": "Dlaczego słoń nie używa komputera? Bo boi się myszy!"
     },
     {
         "date": "19.01",
         "health_advise": "Zdrowa dieta zmniejsza ryzyko osteoporozy o 35%.",
         "healthy_meal": "Kanapki z hummusem i papryką.",
         "trivia": "Tygrysy mają paski również na skórze.",
-        "joke": "Dlaczego samochód cieszy się na myjnię? Bo lubi być czysty i błyszczący."
+        "joke": "Dlaczego pająk nie chodzi do szkoły? Bo już zna wszystkie sieci!"
     },
     {
         "date": "20.01",
@@ -214,70 +214,56 @@
         "health_advise": "Codzienna aktywność fizyczna poprawia nastrój.",
         "healthy_meal": "Sałatka z buraków i koziego sera.",
         "trivia": "Największy las na świecie to Amazonia.",
-        "joke": "Dlaczego komputer nie lubi zimna? Bo nie chce się zamrozić."
+        "joke": "Dlaczego słoń nie używa komputera? Bo boi się myszy!"
     },
     {
         "date": "02.12",
         "health_advise": "Picie wody z cytryną wspomaga trawienie.",
         "healthy_meal": "Sałatka z pomidorami i mozzarellą.",
         "trivia": "Największy wodospad na świecie to Wodospad Wiktorii.",
-        "joke": "Dlaczego komputer nie lubi gorąca? Bo nie chce się przegrzać."
+        "joke": "Dlaczego pająk nie chodzi do szkoły? Bo już zna wszystkie sieci!"
     },
     {
         "date": "03.12",
         "health_advise": "Jedzenie ryb poprawia zdrowie serca.",
         "healthy_meal": "Grillowany łosoś z warzywami.",
         "trivia": "Największa pustynia na świecie to Sahara.",
-        "joke": "Dlaczego komputer nie lubi kurzu? Bo nie chce się zapchać."
+        "joke": "Dlaczego książka była smutna? Bo była czytana od deski do deski."
     },
     {
         "date": "04.12",
         "health_advise": "Regularne spacery poprawiają zdrowie psychiczne.",
         "healthy_meal": "Sałatka z buraków i koziego sera.",
         "trivia": "Największy las na świecie to Amazonia.",
-        "joke": "Dlaczego komputer nie lubi zimna? Bo nie chce się zamrozić."
-    },
-    {
-        "date": "05.12",
-        "health_advise": "Codzienna aktywność fizyczna poprawia nastrój.",
-        "healthy_meal": "Sałatka z buraków i koziego sera.",
-        "trivia": "Największy las na świecie to Amazonia.",
-        "joke": "Dlaczego komputer nie lubi zimna? Bo nie chce się zamrozić."
+        "joke": "Co mówi kanapa do fotela? 'Widzimy się przy stole!'"
     },
     {
         "date": "06.12",
         "health_advise": "Picie wody z cytryną wspomaga trawienie.",
         "healthy_meal": "Sałatka z pomidorami i mozzarellą.",
         "trivia": "Największy wodospad na świecie to Wodospad Wiktorii.",
-        "joke": "Dlaczego komputer nie lubi gorąca? Bo nie chce się przegrzać."
+        "joke": "Co mówi kanapa do fotela? 'Widzimy się przy stole!'"
     },
     {
         "date": "07.12",
         "health_advise": "Jedzenie ryb poprawia zdrowie serca.",
         "healthy_meal": "Grillowany łosoś z warzywami.",
         "trivia": "Największa pustynia na świecie to Sahara.",
-        "joke": "Dlaczego komputer nie lubi kurzu? Bo nie chce się zapchać."
-    },
-    {
-        "date": "08.12",
-        "health_advise": "Regularne spacery poprawiają zdrowie psychiczne.",
-        "healthy_meal": "Sałatka z buraków i koziego sera.",
-        "trivia": "Największy las na świecie to Amazonia.",
-        "joke": "Dlaczego komputer nie lubi zimna? Bo nie chce się zamrozić."
+        "joke": "Dlaczego krowa nie tańczy? Bo woli spokojne pastwisko."
     },
     {
         "date": "09.12",
         "health_advise": "Codzienna aktywność fizyczna poprawia nastrój.",
         "healthy_meal": "Sałatka z buraków i koziego sera.",
         "trivia": "Największy las na świecie to Amazonia.",
-        "joke": "Dlaczego komputer nie lubi zimna? Bo nie chce się zamrozić."
+        "joke": "Co robi książka w deszczowy dzień? 'Kryje się pod parasolem wyobraźni!'"
     },
     {
         "date": "10.12",
         "health_advise": "Picie wody z cytryną wspomaga trawienie.",
         "healthy_meal": "Sałatka z pomidorami i mozzarellą.",
         "trivia": "Największy wodospad na świecie to Wodospad Wiktorii.",
-        "joke": "Dlaczego komputer nie lubi gorąca? Bo nie chce się przegrzać."
+        "joke": "Dlaczego zegar nie mówi? Bo czas leci!"
     },
     {
         "date": "11.12",
@@ -287,143 +273,10 @@
         "joke": "Dlaczego komputer nie lubi kurzu? Bo nie chce się zapchać."
     },
     {
-        "date": "12.12",
-        "health_advise": "Regularne spacery poprawiają zdrowie psychiczne.",
-        "healthy_meal": "Sałatka z buraków i koziego sera.",
-        "trivia": "Największy las na świecie to Amazonia.",
-        "joke": "Dlaczego komputer nie lubi zimna? Bo nie chce się zamrozić."
-    },
-    {
-        "date": "13.12",
-        "health_advise": "Codzienna aktywność fizyczna poprawia nastrój.",
-        "healthy_meal": "Sałatka z buraków i koziego sera.",
-        "trivia": "Największy las na świecie to Amazonia.",
-        "joke": "Dlaczego komputer nie lubi zimna? Bo nie chce się zamrozić."
-    },
-    {
-        "date": "14.12",
-        "health_advise": "Picie wody z cytryną wspomaga trawienie.",
-        "healthy_meal": "Sałatka z pomidorami i mozzarellą.",
-        "trivia": "Największy wodospad na świecie to Wodospad Wiktorii.",
-        "joke": "Dlaczego komputer nie lubi gorąca? Bo nie chce się przegrzać."
-    },
-    {
         "date": "15.12",
         "health_advise": "30 minut spaceru dziennie zmniejsza ryzyko zawału o 25%.",
         "healthy_meal": "Jogurt naturalny z owocami i orzechami.",
         "trivia": "Na noworocznych obyczajach w Szkocji spożywa się haggis.",
         "joke": "Dlaczego matematyka jest smutna? Bo ma za dużo problemów."
-    },
-    {
-        "date": "16.12",
-        "health_advise": "Regularne spacery poprawiają zdrowie psychiczne.",
-        "healthy_meal": "Sałatka z buraków i koziego sera.",
-        "trivia": "Największy las na świecie to Amazonia.",
-        "joke": "Dlaczego komputer nie lubi zimna? Bo nie chce się zamrozić."
-    },
-    {
-        "date": "17.12",
-        "health_advise": "Codzienna aktywność fizyczna poprawia nastrój.",
-        "healthy_meal": "Sałatka z buraków i koziego sera.",
-        "trivia": "Największy las na świecie to Amazonia.",
-        "joke": "Dlaczego komputer nie lubi zimna? Bo nie chce się zamrozić."
-    },
-    {
-        "date": "18.12",
-        "health_advise": "Picie wody z cytryną wspomaga trawienie.",
-        "healthy_meal": "Sałatka z pomidorami i mozzarellą.",
-        "trivia": "Największy wodospad na świecie to Wodospad Wiktorii.",
-        "joke": "Dlaczego komputer nie lubi gorąca? Bo nie chce się przegrzać."
-    },
-    {
-        "date": "19.12",
-        "health_advise": "Jedzenie ryb poprawia zdrowie serca.",
-        "healthy_meal": "Grillowany łosoś z warzywami.",
-        "trivia": "Największa pustynia na świecie to Sahara.",
-        "joke": "Dlaczego komputer nie lubi kurzu? Bo nie chce się zapchać."
-    },
-    {
-        "date": "20.12",
-        "health_advise": "Regularne spacery poprawiają zdrowie psychiczne.",
-        "healthy_meal": "Sałatka z buraków i koziego sera.",
-        "trivia": "Największy las na świecie to Amazonia.",
-        "joke": "Dlaczego komputer nie lubi zimna? Bo nie chce się zamrozić."
-    },
-    {
-        "date": "21.12",
-        "health_advise": "Codzienna aktywność fizyczna poprawia nastrój.",
-        "healthy_meal": "Sałatka z buraków i koziego sera.",
-        "trivia": "Największy las na świecie to Amazonia.",
-        "joke": "Dlaczego komputer nie lubi zimna? Bo nie chce się zamrozić."
-    },
-    {
-        "date": "22.12",
-        "health_advise": "Picie wody z cytryną wspomaga trawienie.",
-        "healthy_meal": "Sałatka z pomidorami i mozzarellą.",
-        "trivia": "Największy wodospad na świecie to Wodospad Wiktorii.",
-        "joke": "Dlaczego komputer nie lubi gorąca? Bo nie chce się przegrzać."
-    },
-    {
-        "date": "23.12",
-        "health_advise": "Jedzenie ryb poprawia zdrowie serca.",
-        "healthy_meal": "Grillowany łosoś z warzywami.",
-        "trivia": "Największa pustynia na świecie to Sahara.",
-        "joke": "Dlaczego komputer nie lubi kurzu? Bo nie chce się zapchać."
-    },
-    {
-        "date": "24.12",
-        "health_advise": "Regularne spacery poprawiają zdrowie psychiczne.",
-        "healthy_meal": "Sałatka z buraków i koziego sera.",
-        "trivia": "Największy las na świecie to Amazonia.",
-        "joke": "Dlaczego komputer nie lubi zimna? Bo nie chce się zamrozić."
-    },
-    {
-        "date": "25.12",
-        "health_advise": "Codzienna aktywność fizyczna poprawia nastrój.",
-        "healthy_meal": "Sałatka z buraków i koziego sera.",
-        "trivia": "Największy las na świecie to Amazonia.",
-        "joke": "Dlaczego komputer nie lubi zimna? Bo nie chce się zamrozić."
-    },
-    {
-        "date": "26.12",
-        "health_advise": "Picie wody z cytryną wspomaga trawienie.",
-        "healthy_meal": "Sałatka z pomidorami i mozzarellą.",
-        "trivia": "Największy wodospad na świecie to Wodospad Wiktorii.",
-        "joke": "Dlaczego komputer nie lubi gorąca? Bo nie chce się przegrzać."
-    },
-    {
-        "date": "27.12",
-        "health_advise": "Jedzenie ryb poprawia zdrowie serca.",
-        "healthy_meal": "Grillowany łosoś z warzywami.",
-        "trivia": "Największa pustynia na świecie to Sahara.",
-        "joke": "Dlaczego komputer nie lubi kurzu? Bo nie chce się zapchać."
-    },
-    {
-        "date": "28.12",
-        "health_advise": "Regularne spacery poprawiają zdrowie psychiczne.",
-        "healthy_meal": "Sałatka z buraków i koziego sera.",
-        "trivia": "Największy las na świecie to Amazonia.",
-        "joke": "Dlaczego komputer nie lubi zimna? Bo nie chce się zamrozić."
-    },
-    {
-        "date": "29.12",
-        "health_advise": "Codzienna aktywność fizyczna poprawia nastrój.",
-        "healthy_meal": "Sałatka z buraków i koziego sera.",
-        "trivia": "Największy las na świecie to Amazonia.",
-        "joke": "Dlaczego komputer nie lubi zimna? Bo nie chce się zamrozić."
-    },
-    {
-        "date": "30.12",
-        "health_advise": "Picie wody z cytryną wspomaga trawienie.",
-        "healthy_meal": "Sałatka z pomidorami i mozzarellą.",
-        "trivia": "Największy wodospad na świecie to Wodospad Wiktorii.",
-        "joke": "Dlaczego komputer nie lubi gorąca? Bo nie chce się przegrzać."
-    },
-    {
-        "date": "31.12",
-        "health_advise": "Jedzenie ryb poprawia zdrowie serca.",
-        "healthy_meal": "Grillowany łosoś z warzywami.",
-        "trivia": "Największa pustynia na świecie to Sahara.",
-        "joke": "Dlaczego komputer nie lubi kurzu? Bo nie chce się zapchać."
     }
 ]
