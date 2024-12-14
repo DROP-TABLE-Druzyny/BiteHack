@@ -5,7 +5,7 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import { renderToString } from 'react-dom/server';
 import 'leaflet/dist/leaflet.css';
 import { useMapContext } from '@/context/MapContext';
-import L from 'leaflet';
+import L, { LatLngExpression } from 'leaflet';
 import { Briefcase } from 'lucide-react';
 import { eventIconMap } from '@/services/Events';
 
@@ -32,11 +32,22 @@ interface CustomIconProps {
     });
   }
 export default function EventsMap() {
-    const { events } = useMapContext();
+    const { events, localization, loading } = useMapContext();
+
+    const position: LatLngExpression = [localization[0], localization[1]]
+
+    if (loading)
+    {
+      return (
+        <div>
+          Loading...
+        </div>
+      )
+    }
 
     return (
         <MapContainer
-            center={[51.505, -0.09]}
+            center={position}
             zoom={13}
             style={{ height: '500px', width: '100%' }}
         >
