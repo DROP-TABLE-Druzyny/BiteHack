@@ -2,6 +2,7 @@
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { Event, EventType } from '@/services/Events'
+import { publicService } from '@/services';
 
 
 interface MapContextType {
@@ -10,19 +11,18 @@ interface MapContextType {
   localization: number[];
   setLocalization: React.Dispatch<React.SetStateAction<number[]>>;
   loading: boolean;
+  focusedEvent: Event | null;
+  setFocusedEvent: React.Dispatch<React.SetStateAction<Event | null>>;
 }
 
 const MapContext = createContext<MapContextType | undefined>(undefined);
 
 export const MapProvider = ({ children }: { children: React.ReactNode }) => {
-  const [events, setEvents] = useState<Event[]>([
-    { id: 1, name: 'Event 1', position: [51.505, -0.09], type: EventType.DEFAULT },
-    { id: 2, name: 'Event 2', position: [51.51, -0.1], type: EventType.WORK },
-  ]);
-
+  const [events, setEvents] = useState<Event[]>([]);
   const [localization, setLocalization] = useState<number[]>([]);
-
   const [loading, setLoading] = useState<boolean>(true);
+
+  const [focusedEvent, setFocusedEvent] = useState<Event | null>(null)
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -34,27 +34,36 @@ export const MapProvider = ({ children }: { children: React.ReactNode }) => {
                 (position) => {
                   const { latitude, longitude } = position.coords;
                   setLocalization([latitude, longitude]);
-                  setLoading(false);
                 },
                 (error) => {
                   console.error("Error getting location:", error);
-                  setLoading(false); // Stop loading if there's an error
                 }
               );
             } else {
               console.log("Geolocation permission denied.");
-              setLoading(false); // Stop loading if permission denied
             }
           })
           .catch((error) => {
             console.error("Error querying permissions:", error);
-            setLoading(false); // Stop loading if there's an error querying permissions
           });
     } else {
       console.log("Geolocation is not supported by this browser.");
-      setLoading(false); // Stop loading if geolocation is not supported
     }
   }, []);
+  
+  useEffect(() => {
+    if (!localization || localization.length == 0) return;
+    console.log(localization);
+
+    async function FetchEvents() {
+      const result = await publicService.getLocalEvents(localization[0], localization[1])
+      setEvents(result)
+      setLoading(false)
+    }
+
+    FetchEvents();
+    
+  }, [localization])
 
   const value: MapContextType = {
     events,
@@ -62,6 +71,8 @@ export const MapProvider = ({ children }: { children: React.ReactNode }) => {
     localization,
     setLocalization,
     loading,
+    focusedEvent,
+    setFocusedEvent,
   }
 
   return (
