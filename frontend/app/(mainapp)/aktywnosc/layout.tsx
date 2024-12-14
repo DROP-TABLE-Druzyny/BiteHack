@@ -25,9 +25,6 @@ export default function Layout({
     <span lang='en' suppressHydrationWarning>
     <MapProvider>
       <div className="flex h-screen flex-col md:flex-row md:overflow-hidden">
-        <div className="w-full flex-none md:w-64">
-          <SideNavEvents />
-        </div>
         <div className="flex-grow p-6 md:overflow-y-auto md:p-10">
           {children}
         </div>
