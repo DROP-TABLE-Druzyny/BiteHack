@@ -51,9 +51,12 @@ export default function EventsDisplayer() {
         <AccordionItem key={event.id} value={`item-${event.id}`} className='hover:bg-gray-200  rounded-lg'>
           <AccordionTrigger onClick={() => handleAccordionClick(event)}>
             <div className="text-lg font-semibold">
-              <p>{event.name}</p>
-              <p>Date: {event.date}</p>
-              <p>Distance: {event.distance} km</p>
+              <p className="text-2xl font-semibold mb-1">{event.name}</p>
+              <div>
+                <p>Date: {event.date}</p>
+                <p>Distance: {event.distance} km</p>
+              </div>
+              
             </div>
           </AccordionTrigger>
           <AccordionContent>
