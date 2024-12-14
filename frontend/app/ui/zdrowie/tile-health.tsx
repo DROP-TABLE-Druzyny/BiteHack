@@ -1,5 +1,3 @@
-
-
 interface TileData {
   title: string;
   text: string;
