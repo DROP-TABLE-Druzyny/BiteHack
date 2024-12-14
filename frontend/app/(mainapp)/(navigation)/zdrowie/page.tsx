@@ -1,5 +1,6 @@
 import Image from "next/image";
 import UserActivity from "@/app/ui/activity/user_activity";
+import TilesHealth from "@/app/ui/zdrowie/tiles-health";
 
 export default function Page() {
   const userData = {
@@ -11,12 +12,14 @@ export default function Page() {
     text: "Lorem ipsum dolor sit amet",
     date: "2024-12-11T00:00:00Z",
   };
-  
+  // <UserActivity userData={userData}/>
+  //     <UserActivity userData={{ ...userData, name: "Adam Kowalski", id: 2 }}/>
+  //     <UserActivity userData={{ ...userData, name: "Anna Nowak", id: 3 }}/>
+
+
   return (
     <div className="flex flex-col md:flex-col gap-4 md:overflow-hidden">
-      <UserActivity userData={userData}/>
-      <UserActivity userData={{ ...userData, name: "Adam Kowalski", id: 2 }}/>
-      <UserActivity userData={{ ...userData, name: "Anna Nowak", id: 3 }}/>
+      <TilesHealth></TilesHealth>
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import UserActivity from "@/app/ui/activity/user_activity";
-import EventsMap from "@/app/ui/activity/EventsMap";
+import EventsMap from "@/app/ui/aktywnosc/EventsMap";
 import SideNavEvents from "@/app/ui/sidenav-events";
 import EventSidenav from "@/app/ui/aktywnosc/event-sidenav";
 import EventsDisplayer from "@/app/ui/aktywnosc/events-displayer";
