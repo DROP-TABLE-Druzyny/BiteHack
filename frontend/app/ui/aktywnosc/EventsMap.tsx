@@ -68,7 +68,7 @@ export default function EventsMap() {
         </MapContainer>
     );
 }
-=======
+
 import { Event } from '@/services/Events';
 
 
