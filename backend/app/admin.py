@@ -2,8 +2,8 @@ from rest_framework import serializers
 from django.contrib import admin
 from django.core.exceptions import ValidationError
 
-from .models import LocalEvent
-from .serializers import LocalEventSerializer
+from .models.models import LocalEvent
+from .serializers.serializers import LocalEventSerializer
 
 @admin.register(LocalEvent)
 class LocalEventAdmin(admin.ModelAdmin):
