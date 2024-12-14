@@ -13,3 +13,4 @@ backend/cov-report/
 .vscode
 .git/
 .env
+frontend/local.env
