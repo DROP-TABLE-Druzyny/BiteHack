@@ -14,6 +14,12 @@ class LocalEventAdmin(admin.ModelAdmin):
     ordering = ['data_start',]
 
     def save_model(self, request, obj, form, change):
+        if LocalEvent.objects.filter(name=form.cleaned_data['name']).exists():
+            event = LocalEvent.objects.get(name=form.cleaned_data['name'])
+            for field, value in form.cleaned_data.items():
+                setattr(event, field, value)
+            event.save()
+        
         serializer = LocalEventSerializer(data=form.cleaned_data)
 
         if serializer.is_valid():

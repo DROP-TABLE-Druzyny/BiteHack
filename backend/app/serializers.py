@@ -69,16 +69,16 @@ class LocalEventSerializer(serializers.ModelSerializer):
         # Validate data start and data end
         if validated_data.get('data_start') > validated_data.get('data_end'):
             raise serializers.ValidationError({'detail': 'Data start must be before data end.'})
-        
-        logger.info('Validating latitude and longitude.')
-        logger.info(f'Latitude: {validated_data.get("latitude")}')
-        logger.info(f'Longitude: {validated_data.get("longitude")}')
 
         # Validate latitude and longitude
         if not (-90 <= validated_data.get('latitude') <= 90):
             raise serializers.ValidationError({'detail': 'Invalid latitude. Must be between -90 and 90.'})
         if not (-180 <= validated_data.get('longitude') <= 180):
             raise serializers.ValidationError({'detail': 'Invalid longitude. Must be between -180 and 180.'})
+        
+        # Validate event type
+        if validated_data.get('type') not in dict(LocalEvent.TYPE_CHOICES).keys():
+            raise serializers.ValidationError({'detail': f'Invalid event type - {validated_data.get("type")}. Must be one of: ' + ', '.join(dict(LocalEvent.TYPE_CHOICES).keys())})
         
         local_event = LocalEvent.objects.create(**validated_data)
         local_event.save()
