@@ -2,19 +2,22 @@ import TileHealth from "./tile-health";
 import imieninyData from "@/public/zdrowie/imieniny.json";
 import kartkaZKalendarzaData from "@/public/zdrowie/kartka_z_kalendarza.json";
 
-export default function TilesHealth() {
+const CITY = 'Krakow';
+const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
+const URL = `https://api.openweathermap.org/data/2.5/weather?q=${CITY}&appid=${API_KEY}&units=metric&lang=pl`;
+
+export  default async function TilesHealth() {
   const randomIndex = Math.floor(Math.random() * kartkaZKalendarzaData.length);
   const tilesData = kartkaZKalendarzaData[randomIndex];
 
-  const weather = "Zachmurzenie umiarkowane, temperatura 10°C, wiatr 15 km/h"; // TODO: fetch from API
-
+  const weather = "Zachmurzenie duże, temperatura 3°C, wiatr 6 km/h"; // TODO: fetch from API
+  
   const today = new Date();
   const dateForSearch = 
     `${String(today.getDate()).padStart(2, "0")}.${String(today.getMonth() + 1).padStart(2, "0")}`;
   const formattedDate = `${dateForSearch}.${today.getFullYear()}`;
   let todayNameDay = imieninyData.find((item) => item.date === dateForSearch);
   
-  console.log(todayNameDay);
   const daysOfWeek = [
     "Niedziela",
     "Poniedziałek",
@@ -32,10 +35,9 @@ export default function TilesHealth() {
       name_day: "Celina, Walerian",
     };
 
-  console.log(todayNameDay);
 
   return (
-    <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+    <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
       <TileHealth
         tileData={{
           title: `${dayOfWeek} ${formattedDate}`,
