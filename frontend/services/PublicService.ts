@@ -97,6 +97,6 @@ export class PublicDjangoService extends ApiService implements IPublicService {
         return this.post<HelpRequest, HelpRequest>('help-request/', data);
     }
     public async completeHelpRequest(id: number): Promise<void> {
-        return this.patch<void, {}>(`help-request/${id}/complete/`, {});
+        return this.post<void, {}>(`help-request/${id}/complete/`, {});
     }
 }
