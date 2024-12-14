@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import '@/app/ui/global.css';
+import '@/app/globals.css';
 import { inter } from '@/app/ui/fonts';
 
 import localFont from "next/font/local";
