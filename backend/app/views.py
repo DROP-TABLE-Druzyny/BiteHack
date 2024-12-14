@@ -1,4 +1,6 @@
+# misc imports
 import logging
+from geopy.distance import great_circle
 
 # django + rest framework imports
 from rest_framework import mixins, viewsets, status
@@ -16,6 +18,9 @@ from .serializers import UserSerializer
 
 from .models import Profile
 from .serializers import ProfileSerializer
+
+from .models import LocalEvent
+from .serializers import LocalEventSerializer
 
 logger = logging.getLogger(__name__)
 
@@ -152,3 +157,50 @@ class ProfileViewSet(mixins.ListModelMixin,
             return Response(serializer.data)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@extend_schema(tags=['LocalEvent'])
+class LocalEventViewSet(
+    mixins.ListModelMixin,
+    mixins.RetrieveModelMixin,
+    #mixins.CreateModelMixin,
+    viewsets.GenericViewSet):
+    """View for listing and creating local events"""
+    queryset = LocalEvent.objects.all()
+    serializer_class = LocalEventSerializer
+    lookup_field = 'id'
+    authentication_classes = []
+
+    def get_queryset(self):
+        """Method to get the queryset for the LocalEvent model"""
+
+        queryset = self.queryset
+
+        # sort by distance if longitude and latitude are provided
+        longitude = self.request.query_params.get('longitude', None)
+        latitude = self.request.query_params.get('latitude', None)
+        if longitude is not None and latitude is not None:
+            if not (-90 <= float(latitude) <= 90) or not (-180 <= float(longitude) <= 180):
+                return queryset
+            
+            user_location = (float(longitude), float(latitude))
+            queryset = sorted(queryset, key=lambda event: great_circle(user_location, (event.longitude, event.latitude)).meters)
+
+        # TODO: filter by type if provided
+
+        return queryset
+
+    @ac([])
+    def list(self, request):
+        """Method to list all local events"""
+
+        queryset = self.get_queryset()
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
+    
+    @ac([])
+    def retrieve(self, request, id=None):
+        """Method to get a local event by ID"""
+
+        local_event = self.get_object()
+        serializer = self.get_serializer(local_event)
+        return Response(serializer.data)

@@ -6,12 +6,13 @@ export interface IPublicService {
     refreshToken(token: string): Promise<{ access: string }>;
     register(username: string, password: string, email: string): Promise<void>;
     login(username: string, password: string): Promise<{ access: string, refresh: string }>;
+    getLocalEvents(latitude: number, longitude: number): Promise<{}>;
 }
 
 export class DjangoService extends ApiService implements IPublicService {
     constructor() {
         const axiosInstance = axios.create({
-            baseURL: 'http://localhost:8000/api/',
+            baseURL: 'http://192.168.1.148:8000/api/',
         });
 
         // if the last request was unauthorized, try to refresh the token
@@ -68,5 +69,10 @@ export class DjangoService extends ApiService implements IPublicService {
         localStorage.removeItem("refresh_token");
 
         return response;
+    }
+    public async getLocalEvents(latitude?: number, longitude?: number): Promise<{}> {
+        // TODO: Replace with the EventType
+        const params = { latitude, longitude };
+        return this.get<{}>('event/', params);
     }
 }
