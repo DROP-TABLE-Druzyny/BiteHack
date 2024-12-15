@@ -8,11 +8,28 @@ import RequestItem from "../ui/pomocnik/prosba/request-item";
 import { ShoppingCartIcon } from "@heroicons/react/24/outline";
 import { formatDistanceToNow } from "date-fns";
 import { pl } from 'date-fns/locale'
-
+import { useAuth } from "@/context/AuthContext";
+import { useRouter } from 'next/navigation'
 const Page = () => {
     const [items, setItems] = useState<HelpRequest[]>([]);
 
+    const { getClientData } = useAuth();
+    const router = useRouter()
+
     useEffect(() => {
+        const fetchUser = async () => {
+            let client = null
+            try {
+                client = await getClientData()
+            }
+            finally
+            {
+                if (!client)
+                {
+                    router.push("./logowanie")
+                }
+            }
+        }
         const fetchItems = async () => {
             try {
                 const response = await publicService.getHelpRequests({});
@@ -23,9 +40,9 @@ const Page = () => {
             }
         };
 
+        fetchUser();
         fetchItems();
     }, []);
-
     return (
         <div className="flex min-h-screen p-8 w-full justify-center w-100">
             <main className="flex flex-col items-center">
