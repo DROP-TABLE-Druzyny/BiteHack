@@ -14,6 +14,8 @@ import {
   QuestionMarkCircleIcon,
 } from "@heroicons/react/24/outline";
 
+import TimeDropdown from "@/app/ui/pomocnik/prosba/time-dropdown";
+
 export type HelpRequestTypes =
   | "SHOPPING"
   | "MEDICAL"
@@ -37,20 +39,23 @@ export default function Page() {
       <main className="flex flex-col items-center">
         <Header text="Prośba" backUrl="/" />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-8">
+        <div className="grid grid-cols-3 md:grid-cols-3 gap-4 mt-8">
           {tilesData.map((tileData, idx) => (
             <RequestTypeTile key={idx} tileData={tileData} />
           ))}
         </div>
 
-        <div className="mt-8">dropdown z czasem</div>
+        <div className="mt-16">
+          <TimeDropdown />
+
+        </div>
 
         <form className="flex flex-col items-center mt-16">
-          <Button label="Lokalizuj" className="mt-4 text-lg font-semibold" />
+          <Button label="Lokalizuj" className="mt-4 text-3xl font-semibold px-12 py-4" />
         </form>
 
         <form className="flex flex-col items-center mt-16">
-          <Button label="Dodaj prośbę" className="mt-4 text-lg font-semibold" />
+          <Button label="Dodaj prośbę" className="mt-4 text-3xl font-semibold px-8 py-4" />
         </form>
       </main>
     </div>
