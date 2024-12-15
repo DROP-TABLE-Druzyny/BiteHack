@@ -15,10 +15,10 @@ import { AuthProvider } from "@/context/AuthContext";
 
 export const metadata: Metadata = {
   title: {
-    template: '%s | LiveActive',
-    default: 'LiveActive',
+    template: '%s | eSenior',
+    default: 'eSenior',
   },
-  description: 'Example site called LiveActive',
+  description: 'Example site called eSenior',
 };
 
 export default function RootLayout({
