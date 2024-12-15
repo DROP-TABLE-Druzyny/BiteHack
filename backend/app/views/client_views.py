@@ -171,7 +171,7 @@ class ClientViewSet(
                 status=status.HTTP_200_OK
             )
         except Client.DoesNotExist:
-            self.create(request)
+            return self.create(request)
     
     @action(detail=False, methods=['get'], authentication_classes=[], permission_classes=[])
     def authenticated(self, request):
