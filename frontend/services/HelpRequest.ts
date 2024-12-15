@@ -13,7 +13,7 @@ export type HelpRequest = {
     expiration: string;
     latitude: number;
     longitude: number;
-    variable: HelpRequestTypes;
+    type: HelpRequestTypes;
     accepted_by: number | null;
     completed: boolean;
 };
