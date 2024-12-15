@@ -1,11 +1,8 @@
-import Image from "next/image";
-import Link from "next/link";
 import CategoryItem from "./category-item";
-import { Button } from "@/components/ui/button";
 
 interface TileData {
-  tileData: { title: string, icon:any };
-  isSelected: Boolean;
+  tileData: { title: string, icon:React.FC<React.SVGProps<SVGSVGElement>> };
+  isSelected: boolean;
   onClick: () => void;
 }
 
@@ -13,7 +10,7 @@ export default function RequestTypeTile({ tileData,isSelected, onClick }: TileDa
 
   const TileIcon = tileData.icon;
   const radius = 60;
-  const angle = 0;
+  //const angle = 0;
   return (
     <button onClick={onClick} type="button">
     <CategoryItem

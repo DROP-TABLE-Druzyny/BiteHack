@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Button from '@/app/ui/button';
 import { AuthCodeInput } from './authCodeInput';
 import { InformationCircleIcon } from '@heroicons/react/24/outline';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 interface VerifyFormProps {
     onSubmit: (authCode: string) => Promise<boolean>;
@@ -10,6 +11,9 @@ interface VerifyFormProps {
 export default function VerifyForm({ onSubmit }: VerifyFormProps) {
     const [authCode, setAuthCode] = useState('');
     const [isInvalid, setIsInvalid] = useState(false);
+    const params = useSearchParams();
+    const route = params.get('route');
+    const router = useRouter();
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -18,6 +22,7 @@ export default function VerifyForm({ onSubmit }: VerifyFormProps) {
         if(result){
             setAuthCode('');
         }
+        router.push(`/${route ? `${route}` : ''}`);
     };
 
     return (

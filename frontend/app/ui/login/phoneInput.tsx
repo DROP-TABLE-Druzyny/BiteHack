@@ -51,3 +51,5 @@ export const PhoneInput = forwardRef(({ label = "Phone Number", placeholder = "1
     </div>
   )
 })
+
+PhoneInput.displayName = 'PhoneInput'

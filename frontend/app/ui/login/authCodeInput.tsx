@@ -11,7 +11,7 @@ interface AuthCodeInputProps {
   className?: string
 }
 
-export const AuthCodeInput = forwardRef(({ label = "Authentication Code", placeholder = "123456", value, onChange, className='' }: AuthCodeInputProps, ref) => {
+const AuthCodeInput = forwardRef(({ label = "Authentication Code", placeholder = "123456", value, onChange, className='' }: AuthCodeInputProps, ref) => {
   const [internalValue, setInternalValue] = useState(value)
 
   useEffect(() => {
@@ -51,3 +51,7 @@ export const AuthCodeInput = forwardRef(({ label = "Authentication Code", placeh
     </div>
   )
 })
+
+AuthCodeInput.displayName = 'AuthCodeInput'
+
+export { AuthCodeInput }

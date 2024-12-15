@@ -1,7 +1,7 @@
 'use client'
 
-import React, { useEffect, useState } from 'react';
-import { InformationCircleIcon, UserIcon, MapIcon, UserGroupIcon, HeartIcon } from '@heroicons/react/24/outline';
+import React, { useState } from 'react';
+import { InformationCircleIcon, MapIcon, UserGroupIcon, HeartIcon } from '@heroicons/react/24/outline';
 import NavItem from './navitem';
 import { Search } from 'lucide-react';
 
@@ -15,9 +15,9 @@ export interface NavItemProps {
 
 const Navigation: React.FC = () => {
   const dist_main = 90;
-  const dist_far = 120;
+  //const dist_far = 120;
 
-  const [items, setItems] = useState<NavItemProps[]>([
+  const [items, ] = useState<NavItemProps[]>([
     { href: '/zdrowie', icon: HeartIcon, label: 'Zdrowie', radius: 90},
     { href: '/informacje', icon: InformationCircleIcon, label: 'Informacje', radius: 90 },
     { href: '/pomocnik', icon: UserGroupIcon, label: 'Pomocnik', radius: 90 },
@@ -35,7 +35,7 @@ const Navigation: React.FC = () => {
 
   const NavItems = () => 
   {
-    let navItems = []
+    const navItems = []
 
     const n = items.length;
 

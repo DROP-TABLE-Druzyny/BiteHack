@@ -2,9 +2,9 @@ import TileHealth from "./tile-health";
 import imieninyData from "@/public/zdrowie/imieniny.json";
 import kartkaZKalendarzaData from "@/public/zdrowie/kartka_z_kalendarza.json";
 
-const CITY = 'Krakow';
-const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
-const URL = `https://api.openweathermap.org/data/2.5/weather?q=${CITY}&appid=${API_KEY}&units=metric&lang=pl`;
+//const CITY = 'Krakow';
+//const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
+//const URL = `https://api.openweathermap.org/data/2.5/weather?q=${CITY}&appid=${API_KEY}&units=metric&lang=pl`;
 
 export  default async function TilesHealth() {
   const randomIndex = Math.floor(Math.random() * kartkaZKalendarzaData.length);

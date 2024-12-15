@@ -22,7 +22,7 @@ import { useRouter } from "next/navigation";
 
 const Page = () => {
   const [selectedTile, setSelectedTile] = useState<string | null>(null);
-  const [timeDropdownValue, setTimeDropdownValue] = useState(null);
+  const [timeDropdownValue, setTimeDropdownValue] = useState("");
   const [isLocateButtonClicked, setIsLocateButtonClicked] = useState("");
   const [location, setLocation] = useState<{
     latitude: number;
@@ -42,7 +42,7 @@ const Page = () => {
     setSelectedTile(title);
   };
 
-  const handleTimeDropdownChange = (value: any) => {
+  const handleTimeDropdownChange = (value: string) => {
     setTimeDropdownValue(value);
   };
 

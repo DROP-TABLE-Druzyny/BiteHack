@@ -1,6 +1,4 @@
-import clsx from "clsx";
 import Image from "next/image";
-import { MapIcon } from "@heroicons/react/24/outline";
 
 interface UserData {
     id: number;

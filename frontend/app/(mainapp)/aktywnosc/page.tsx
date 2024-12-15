@@ -1,22 +1,13 @@
-import Image from "next/image";
 import EventsMap from "@/app/ui/aktywnosc/EventsMap";
 import SideNavEvents from "@/app/ui/sidenav-events";
 import EventsDisplayer from "@/app/ui/aktywnosc/events-displayer";
+import { MapProvider } from "@/context/MapContext";
 
 export default function Page() {
-  const userData = {
-    id: 1,
-    name: "John Brown",
-    email: "example@email.com",
-    avatar_img_url: "/avatars/avatar1.png",
-    route_img_url: "/example/route1.png",
-    text: "Lorem ipsum dolor sit amet",
-    date: "2024-12-11T00:00:00Z",
-  };
-  
   return (
-
-    <div className="flex h-screen flex-col md:flex-row md:overflow-hidden">
+    <span>
+      <MapProvider>
+        <div className="flex h-screen flex-col md:flex-row md:overflow-hidden">
           <div className="w-full flex-none md:w-96">
             <SideNavEvents>
               <EventsDisplayer/>
@@ -27,6 +18,8 @@ export default function Page() {
               <EventsMap/>
             </div>
           </div>
-      </div>
+        </div>
+      </MapProvider>
+    </span>
   );
 }

@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { FetchDomains, SearchItem } from "@/services/Search";
 import ArrowLeftIcon from "@heroicons/react/24/outline/ArrowLeftIcon";
 import { HeartCrack, Search } from "lucide-react";
+import Link from "next/link";
 import React, { useState } from "react";
 
 export default function Page() {
@@ -39,12 +40,12 @@ export default function Page() {
         }`}
       >
         <div className="flex items-center justify-center">
-          <a
+          <Link
             href="/"
             className="p-2 mb-8 mr-4 bg-amber-600 border-1 border-white rounded-full shadow-lg text-3xl text-white drop-shadow-md font-bold"
           >
             <ArrowLeftIcon className="w-14 h-14" />
-          </a>
+          </Link>
           <h1 className="p-4 flex gap-2 items-center text-white text-4xl mb-8 font-extrabold bg-amber-600 border-white rounded-full shadow-lg drop-shadow-md">
             Wyszukiwarka
             <Search size={32} />

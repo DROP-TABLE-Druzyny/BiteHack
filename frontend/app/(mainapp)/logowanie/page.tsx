@@ -1,17 +1,13 @@
 'use client'
 
-import { useState } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { Suspense, useState } from 'react';
 import Header from '@/app/ui/login/header';
 import { clientService } from '@/services';
 import LoginForm from '@/app/ui/login/loginForm';
 import VerifyForm from '@/app/ui/login/verifyForm';
 
 export default function Page() {
-  const router = useRouter();
-  const params = useSearchParams();
   const client = clientService;
-  const route = params.get('route');
   const [phoneNum, setPhoneNumber] = useState('');
   const [showVerifyForm, setShowVerifyForm] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
@@ -19,7 +15,7 @@ export default function Page() {
   const handleLoginSubmit = async (phoneNumber: string) => {
     try {
       setPhoneNumber(phoneNumber);
-      const response = await client.generateRandomCode(phoneNumber);
+      await client.generateRandomCode(phoneNumber);
       setIsTransitioning(true);
       setTimeout(() => {
         setShowVerifyForm(true);
@@ -35,7 +31,6 @@ export default function Page() {
       const response = await client.login(phoneNum, authCode);
       const token = response.access_token;
       localStorage.setItem('access_token', token);
-      router.push(`/${route ? `${route}` : ''}`);
       return false
     } catch (error) {
       console.log(error);
@@ -50,9 +45,11 @@ export default function Page() {
         <div className={`transition-opacity duration-300 ${!showVerifyForm && !isTransitioning ? 'opacity-100' : 'opacity-0'}`}>
           {!showVerifyForm && <LoginForm onSubmit={handleLoginSubmit} />}
         </div>
-        <div className={`w-full transition-opacity duration-300 ${showVerifyForm && !isTransitioning ? 'opacity-100' : 'opacity-0'}`}>
-          {showVerifyForm && !isTransitioning && <VerifyForm onSubmit={handleVerifySubmit} />}
-        </div>
+        <Suspense>
+          <div className={`w-full transition-opacity duration-300 ${showVerifyForm && !isTransitioning ? 'opacity-100' : 'opacity-0'}`}>
+            {showVerifyForm && !isTransitioning && <VerifyForm onSubmit={handleVerifySubmit} />}
+          </div>
+        </Suspense>
       </main>
     </div>
   );
