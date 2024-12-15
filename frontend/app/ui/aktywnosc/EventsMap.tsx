@@ -10,10 +10,8 @@ import { Briefcase } from 'lucide-react';
 import { eventIconMap } from '@/services/Events';
 import { Event } from '@/services/Events';
 
-
-
-
-
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 interface CustomIconProps {
   icon: React.ReactNode; // Accept any React node, but specifically a Lucide icon
@@ -53,7 +51,7 @@ export default function EventsMap() {
   const position: LatLngExpression = [localization[0], localization[1]];
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Skeleton height={800} width="100%" />;
   }
 
   return (
@@ -66,7 +64,6 @@ export default function EventsMap() {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      {/* Handle map focus when focusedEvent changes */}
       <MapFocusHandler focusedEvent={focusedEvent} />
       {events.map((event) => {
         const customIcon = createCustomIcon({ icon: eventIconMap[event.type] });
@@ -84,4 +81,3 @@ export default function EventsMap() {
     </MapContainer>
   );
 }
-

@@ -1,11 +1,5 @@
 "use client";
 
-import { MapPinIcon } from "@heroicons/react/24/outline";
-
-import clsx from "clsx";
-import { Button } from "@/components/ui/button";
-import EventSidenav from "./event-sidenav";
-
 import {
   Accordion,
   AccordionContent,
@@ -14,25 +8,23 @@ import {
 } from "@/components/ui/accordion";
 import { Event, eventIconMap } from "@/services/Events";
 import { useMapContext } from "@/context/MapContext";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 export default function EventsDisplayer() {
-  const {events, loading, setFocusedEvent} = useMapContext();
+  const { events, loading, setFocusedEvent } = useMapContext();
 
-  if (loading)
-  {
+  if (loading) {
     return (
       <div>
-        Loading
+        <Skeleton height={120} count={5} className="rounded-xl"/>
       </div>
-    )
+    );
   }
 
-  const handleAccordionClick = (event: Event
-  ) => {
-    setFocusedEvent(event)
+  const handleAccordionClick = (event: Event) => {
+    setFocusedEvent(event);
   };
-  
-  
 
   return (
     <Accordion className="" type="single" collapsible>
@@ -48,9 +40,8 @@ export default function EventsDisplayer() {
                 <p className="text-2xl font-semibold mb-1">{event.name}</p>
                 {eventIconMap[event.type]}
               </div>
-              
               <div className="text-gray-700 font-extralight">
-                <p>Start: {(new Date(event.data_start)).toLocaleDateString()}</p>
+                <p>Start: {new Date(event.data_start).toLocaleDateString()}</p>
                 {/*<p>Distance: {event.distance} km</p>*/}
               </div>
             </div>
