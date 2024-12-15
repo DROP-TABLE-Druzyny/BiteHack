@@ -16,9 +16,6 @@ from drf_spectacular.utils import extend_schema
 from django.contrib.auth import models as auth_models
 from ..serializers.serializers import UserSerializer
 
-from ..models.models import Profile
-from ..serializers.serializers import ProfileSerializer
-
 from ..models.models import LocalEvent
 from ..serializers.serializers import LocalEventSerializer
 
@@ -107,56 +104,6 @@ class UserViewSet(
             )
 
         return Response(serializer.data)
-
-@extend_schema(tags=['Profile'])
-class ProfileViewSet(mixins.ListModelMixin,
-    mixins.RetrieveModelMixin,
-    mixins.UpdateModelMixin,
-    viewsets.GenericViewSet):
-    """View for retrieving and updating user profiles"""
-
-    queryset = Profile.objects.all()
-    serializer_class = ProfileSerializer
-    lookup_field = 'id'
-    authentication_classes = []
-
-    @ac([IsAuthenticated])
-    def list(self, request):
-        """Method to get the currently authenticated user's profile - needs authentication"""
-
-        # Check if the user is authenticated
-        if not request.user.is_authenticated:
-            return Response(
-                {'detail': 'Authentication credentials were not provided.'},
-                status=status.HTTP_401_UNAUTHORIZED
-            )
-
-        # Get the user's profile
-        profile = self.get_queryset().get(user=request.user)
-        serializer = self.get_serializer(profile)
-        return Response(serializer.data)
-
-    def retrieve(self, request, id=None):
-        """Method to get a user's profile by ID"""
-
-        # Get the user's profile
-        profile = self.get_object()
-        serializer = self.get_serializer(profile)
-        return Response(serializer.data)
-
-    @ac([IsAuthenticated])
-    def update(self, request, id=None):
-        """Method to update a user's profile - needs authentication"""
-
-        # Get the user's profile
-        profile = self.get_object()
-        serializer = self.get_serializer(profile, data=request.data, partial=True)
-
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @extend_schema(tags=['LocalEvent'])
 class LocalEventViewSet(
