@@ -1,8 +1,6 @@
 "use client";
 
 import Button from "@/app/ui/button";
-import { PhoneInput } from "@/app/ui/login/phoneInput";
-import { useRouter, useSearchParams } from "next/navigation";
 import Header from "@/app/ui/login/header";
 import RequestTypeTile from "@/app/ui/pomocnik/prosba/request-type-tile";
 import {
@@ -17,14 +15,6 @@ import {
 import TimeDropdown from "@/app/ui/pomocnik/prosba/time-dropdown";
 import React, { useState } from "react";
 import clsx from "clsx";
-
-export type HelpRequestTypes =
-  | "SHOPPING"
-  | "MEDICAL"
-  | "TRANSPORT"
-  | "CARE"
-  | "WALK"
-  | "OTHER";
 
 const Page = () => {
   const [selectedTile, setSelectedTile] = useState<string | null>(null);
@@ -73,12 +63,30 @@ const Page = () => {
     }
   };
 
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    fetch(event.currentTarget.action, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        'type': selectedTile,
+        'time': timeDropdownValue,
+        'location': location,
+        
+      }),
+    });
+  };
+
   return (
     <div className="flex min-h-screen p-8 w-full justify-center">
       <main className="flex flex-col items-center">
         <Header text="Prośba" backUrl="/" />
 
-        <form className="flex flex-col items-center mt-2">
+        <form className="flex flex-col items-center mt-2" action="/your-form-action-url" onSubmit={handleSubmit}>
+          
           <div className="grid grid-cols-3 md:grid-cols-3 gap-4 mt-8">
             {tilesData.map((tileData, idx) => (
               <RequestTypeTile
