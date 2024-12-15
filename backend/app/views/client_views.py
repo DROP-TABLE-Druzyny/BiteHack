@@ -46,7 +46,7 @@ class ClientViewSet(
     def _generate_random_code(length=6):
         return '123456'
     
-    def _check_random_code(code):
+    def _check_random_code(self, code):
         # temporary code
         return code == '123456'
     
@@ -170,7 +170,7 @@ class ClientViewSet(
                 status=status.HTTP_200_OK
             )
         except Client.DoesNotExist:
-            self.create(request)
+            return self.create(request)
     
     @action(detail=False, methods=['get'], authentication_classes=[], permission_classes=[])
     def authenticated(self, request):

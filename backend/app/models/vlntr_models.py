@@ -49,6 +49,3 @@ class Volounteer(AbstractBaseUser):
         """String representation of the Volounteer model"""
 
         return str(self.name)
-    
-    def generate_access_token(self):
-        """Method to generate an access token"""
