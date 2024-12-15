@@ -4,7 +4,8 @@ import {
   UserGroupIcon,
   HeartIcon,
   InformationCircleIcon,
-  LifebuoyIcon
+  LifebuoyIcon,
+  EllipsisHorizontalIcon
   
 } from '@heroicons/react/24/outline';
 
@@ -28,6 +29,9 @@ const links = [
   { name: 'Informacje', 
     href: '/informacje', 
     icon: InformationCircleIcon },
+    { name: 'Wszystkie opcje', 
+      href: '/', 
+      icon: EllipsisHorizontalIcon },
 ];
 
 export default function NavLinks() {
