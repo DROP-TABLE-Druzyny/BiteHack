@@ -13,7 +13,7 @@ export interface IClientService {
 export class ClientDjangoService extends ApiService implements IClientService {
     constructor() {
         const axiosInstance = axios.create({
-            baseURL: 'http://192.168.1.148:8000/api/',
+            baseURL: 'http://localhost:8000/api/',
         });
         
         super(axiosInstance);

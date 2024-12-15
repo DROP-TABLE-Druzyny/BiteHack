@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useImperativeHandle, forwardRef } from 'react'
+import React, { useState, useImperativeHandle, forwardRef, useEffect } from 'react'
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
@@ -13,6 +13,10 @@ interface AuthCodeInputProps {
 
 export const AuthCodeInput = forwardRef(({ label = "Authentication Code", placeholder = "123456", value, onChange, className='' }: AuthCodeInputProps, ref) => {
   const [internalValue, setInternalValue] = useState(value)
+
+  useEffect(() => {
+    setInternalValue(value)
+  }, [value])
 
   const formatAuthCode = (input: string) => {
     const cleaned = input.replace(/\D/g, '')
