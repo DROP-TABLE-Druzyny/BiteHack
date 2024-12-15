@@ -14,15 +14,15 @@ export interface NavItemProps {
 }
 
 const Navigation: React.FC = () => {
-  const dist_main = 60;
+  const dist_main = 90;
   const dist_far = 120;
 
   const [items, setItems] = useState<NavItemProps[]>([
-    { href: '/zdrowie', icon: HeartIcon, label: 'Zdrowie', radius: 60},
-    { href: '/informacje', icon: InformationCircleIcon, label: 'Informacje', radius: 60 },
-    { href: '/pomocnik', icon: UserGroupIcon, label: 'Pomocnik', radius: 60 },
-    { href: '/wyszukiwanie', icon: Search, label: 'Wyszukiwarka', radius: 60},
-    { href: '/aktywnosc', icon: MapIcon, label: 'Wydarzenia', radius: 60},
+    { href: '/zdrowie', icon: HeartIcon, label: 'Zdrowie', radius: 90},
+    { href: '/informacje', icon: InformationCircleIcon, label: 'Informacje', radius: 90 },
+    { href: '/pomocnik', icon: UserGroupIcon, label: 'Pomocnik', radius: 90 },
+    { href: '/wyszukiwanie', icon: Search, label: 'Wyszukiwarka', radius: 90},
+    { href: '/aktywnosc', icon: MapIcon, label: 'Wydarzenia', radius: 90},
 
   ]);
 
@@ -30,7 +30,7 @@ const Navigation: React.FC = () => {
     const rad = (Math.PI / 180) * angle;
     return {
       x: Math.cos(rad) * (radius + dist),
-      y: Math.sin(rad) * (radius + dist),
+      y: Math.sin(rad) * (radius + dist)+80,  // OFFSET
     };
   };
 
