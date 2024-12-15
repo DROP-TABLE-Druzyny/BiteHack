@@ -22,7 +22,7 @@ const Navigation: React.FC = () => {
   const [items, ] = useState<NavItemProps[]>([
     { href: '/zdrowie', icon: HeartIcon, label: 'Zdrowie', radius: 90},
     { href: '/informacje', icon: InformationCircleIcon, label: 'Informacje', radius: 90 },
-    { href: '/pomocnik', icon: UserGroupIcon, label: 'Pomocnik', radius: 90 },
+    { href: '/pomocnik', icon: UserGroupIcon, label: 'Mój pomocnik', radius: 90 },
     { href: '/wyszukiwanie', icon: Search, label: 'Wyszukiwarka', radius: 90},
     { href: '/aktywnosc', icon: MapIcon, label: 'Wydarzenia', radius: 90},
   ]);
