@@ -220,6 +220,22 @@ class ClientViewSet(
             status=status.HTTP_401_UNAUTHORIZED
         )
     
+    @action(detail=False, methods=['post'], authentication_classes=[], permission_classes=[])
+    def pins(self, request, phone=None):
+        """Update the client's pins"""
+
+        client = check_auth(request)
+        if not client:
+            return Response(
+                {'detail': 'Authentication credentials were not provided.'},
+                status=status.HTTP_401_UNAUTHORIZED
+            )
+
+        client.pins = request.data.get('pins', [])
+        client.save()
+
+        return Response({'detail': 'Pins updated.'}, status=status.HTTP_200_OK)
+
 @extend_schema(tags=['HelpRequest'])
 class HelpRequestViewSet(
     mixins.CreateModelMixin,
