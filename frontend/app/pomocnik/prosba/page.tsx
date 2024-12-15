@@ -15,6 +15,7 @@ import {
 } from "@heroicons/react/24/outline";
 
 import TimeDropdown from "@/app/ui/pomocnik/prosba/time-dropdown";
+import { useState } from 'react';
 
 export type HelpRequestTypes =
   | "SHOPPING"
@@ -25,6 +26,8 @@ export type HelpRequestTypes =
   | "OTHER";
 
 export default function Page() {
+  const [selectedTile, setSelectedTile] = useState<string | null>(null);
+
   const tilesData = [
     { title: "Zakupy", icon: ShoppingCartIcon },
     { title: "Medyczne", icon: ShieldCheckIcon },
@@ -34,28 +37,38 @@ export default function Page() {
     { title: "Inne", icon: QuestionMarkCircleIcon },
   ];
 
+  const handleTileClick = (title: string) => {
+    console.log("handling it");
+    setSelectedTile(title);
+  };
+
   return (
     <div className="flex min-h-screen p-8 w-full justify-center">
       <main className="flex flex-col items-center">
-        <Header text="Prośba" backUrl="/" />
+          <Header text="Prośba" backUrl="/" />
 
-        <div className="grid grid-cols-3 md:grid-cols-3 gap-4 mt-8">
-          {tilesData.map((tileData, idx) => (
-            <RequestTypeTile key={idx} tileData={tileData} />
-          ))}
-        </div>
+            <form className="flex flex-col items-center mt-2">
 
-        <div className="mt-16">
-          <TimeDropdown />
+            <div className="grid grid-cols-3 md:grid-cols-3 gap-4 mt-8">
+              {tilesData.map((tileData, idx) => (
+                
+                <RequestTypeTile
+                  key={idx}
+                  tileData={tileData}
+                  isSelected={selectedTile === tileData.title}
+                  onClick={() => handleTileClick(tileData.title)}
+                />
 
-        </div>
+              ))}
+            </div>
 
-        <form className="flex flex-col items-center mt-16">
-          <Button label="Lokalizuj" className="mt-4 text-3xl font-semibold px-12 py-4" />
-        </form>
+            <div className="mt-16">
+              <TimeDropdown />
+            </div>
 
-        <form className="flex flex-col items-center mt-16">
-          <Button label="Dodaj prośbę" className="mt-4 text-3xl font-semibold px-8 py-4" />
+            <Button label="Lokalizuj" className="mt-4 text-3xl font-semibold px-12 py-4" />
+          
+            <Button label="Dodaj prośbę" className="mt-4 text-3xl font-semibold px-8 py-4" />
         </form>
       </main>
     </div>
