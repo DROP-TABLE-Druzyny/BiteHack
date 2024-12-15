@@ -17,7 +17,7 @@ interface TileData {
             height={400}
             className="rounded-2xl"
         />
-        <label className="block text-lg text-center mt-2 capitalize">{tileData.title}</label>
+        <label className="block text-xl text-center mt-2 capitalize">{tileData.title}</label>
       </Link>
     );
   }
