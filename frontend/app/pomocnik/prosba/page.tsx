@@ -30,6 +30,7 @@ const Page = () => {
   const [selectedTile, setSelectedTile] = useState<string | null>(null);
   const [timeDropdownValue, setTimeDropdownValue] = useState(null);
   const [isLocateButtonClicked, setIsLocateButtonClicked] = useState("");
+  const [location, setLocation] = useState<{ latitude: number; longitude: number } | null>(null);
 
   const tilesData = [
     { title: "Zakupy", icon: ShoppingCartIcon },
@@ -47,6 +48,29 @@ const Page = () => {
 
   const handleTimeDropdownChange = (value:any) => {
     setTimeDropdownValue(value);
+  };
+
+  const handleLocateClick = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const loc = {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+          };
+          setLocation(loc);
+          console.log("Current location:", loc);
+          setIsLocateButtonClicked("located");
+        },
+        (error) => {
+          console.error("Error getting location:", error);
+          setIsLocateButtonClicked("");
+        }
+      );
+    } else {
+      console.log("Geolocation is not supported by this browser.");
+      setIsLocateButtonClicked("");
+    }
   };
 
   return (
@@ -85,7 +109,7 @@ const Page = () => {
                 "opacity-0": timeDropdownValue === null,
               }
             )}
-            onClick={() => setIsLocateButtonClicked("value")}
+            onClick={handleLocateClick}
           />
 
           
