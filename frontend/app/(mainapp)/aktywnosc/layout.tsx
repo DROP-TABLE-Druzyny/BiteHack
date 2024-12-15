@@ -24,10 +24,8 @@ export default function Layout({
   return  (
     <span lang='en' suppressHydrationWarning>
     <MapProvider>
-      <div className="flex h-screen flex-col md:flex-row md:overflow-hidden">
-        <div className="flex-grow p-6 md:overflow-y-auto md:p-10">
+      <div>
           {children}
-        </div>
       </div>
     </MapProvider>
     </span>
