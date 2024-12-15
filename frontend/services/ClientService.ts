@@ -71,4 +71,12 @@ export class ClientDjangoService extends ApiService implements IClientService {
             }
         });
     }
+    public async updatePins(pins: string[]): Promise<void> {
+        // TODO: Replace any with pin type
+        await this.patch<void, {pins: any[]}>('client/', { 'pins': pins }, {
+            headers: {
+                'Authorization': `Bearer ${this._retrieveToken()}`
+            }
+        });
+    }
 }

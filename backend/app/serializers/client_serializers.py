@@ -25,6 +25,18 @@ class ClientModelSerializer(serializers.ModelSerializer):
         
         return client
 
+    def update(self, instance, validated_data):
+        """Method to create a new client"""
+
+        # Validate phone number
+        if not validated_data['pins']:
+            raise ValidationError({'detail': 'New pin list is required.'})
+
+        instance['pins'] = validated_data['pins']
+        instance.save()
+        
+        return instance
+
 class HelpRequestSerializer(serializers.ModelSerializer):
     """Model serializer for the HelpRequest model"""
 

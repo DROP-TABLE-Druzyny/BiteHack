@@ -29,7 +29,7 @@ class Client(AbstractBaseUser):
     name = models.CharField(max_length=64, blank=True, null=False, default='Użytkownik')
     phone = PhoneField(blank=True, null=False, help_text='Numer telefonu w formacie +48 123 456 789', unique=True)
     # TODO: Pozniej dodac jak zrobicie front
-    #custom_pins = models.JSONField(blank=True, null=False, default=dict)
+    custom_pins = models.JSONField(blank=True, null=False, default=dict)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
