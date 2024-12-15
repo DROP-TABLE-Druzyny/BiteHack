@@ -38,8 +38,8 @@ const Page = () => {
     { title: "Inne", icon: QuestionMarkCircleIcon, value: "OTHER" },
   ];
 
-  const handleTileClick = (title: string) => {
-    setSelectedTile(title);
+  const handleTileClick = (value: string) => {
+    setSelectedTile(value);
   };
 
   const handleTimeDropdownChange = (value: string) => {
@@ -105,9 +105,13 @@ const Page = () => {
           action="/your-form-action-url"
           onSubmit={handleSubmit}
         >
-          <label className="text-2xl text-center">
-            Kliknij kafelek z odpowiednim rodzajem prośby: 
-            </label>
+          <label
+            className={clsx("text-2xl text-center", {
+              "invisible": selectedTile !== null,
+            })}
+          >
+            Kliknij kafelek z odpowiednim rodzajem prośby:
+          </label>
           <div className="grid grid-cols-3 md:grid-cols-3 gap-4 mt-8">
             {tilesData.map((tileData, idx) => (
               <RequestTypeTile
@@ -125,10 +129,16 @@ const Page = () => {
               "opacity-0": selectedTile === null,
             })}
           >
-            <label className="text-2xl text-center mb-2">
-              Kliknij przycisk aby wybrać jak pilna jest prośba: 
+            <label
+              className={clsx("text-2xl text-center mb-2", {
+                "invisible": timeDropdownValue !== "",
+              })}
+            >
+              Kliknij przycisk aby wybrać jak pilna jest prośba:
             </label>
-            <TimeDropdown onChange={handleTimeDropdownChange} />
+            <TimeDropdown
+              onChange={setTimeDropdownValue}
+            />
           </div>
           
           <div className={clsx(
@@ -141,7 +151,9 @@ const Page = () => {
                   ),
                 })}>
  
-            <label className="text-2xl text-center mb-2">
+            <label className={clsx("text-2xl text-center mb-2", {
+                "invisible": isLocateButtonClicked !== "",
+              })}>
               Kliknij przycisk abyśmy wiedzieli gdzie jesteś: 
             </label>
             <Button
