@@ -43,7 +43,7 @@ export const PhoneInput = forwardRef(({ label = "Phone Number", placeholder = "1
         placeholder={placeholder}
         value={internalValue}
         onChange={handleChange}
-        className={`px-6 py-2 rounded-full bg-amber-600 placeholder:text-white placeholder:opacity-80 text-white border-2 border-white shadow-md ${className}`}
+        className={`px-6 py-4 rounded-full bg-amber-600 placeholder:text-white placeholder:opacity-80 text-white border-2 border-white shadow-md ${className}`}
         minLength={11}
         maxLength={11}
         required

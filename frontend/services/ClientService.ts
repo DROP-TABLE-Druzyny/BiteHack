@@ -54,7 +54,6 @@ export class ClientDjangoService extends ApiService implements IClientService {
     }
     public async isLoggedIn(): Promise<boolean> {
         const _token = this._retrieveToken();
-
         if (!_token) return false;
 
         const response = this.get<void>('client/authenticated/', {}, {
@@ -66,6 +65,7 @@ export class ClientDjangoService extends ApiService implements IClientService {
         return response.then(() => true).catch(() => false);
     }
     public async getClientData(): Promise<client> {
+        console.log(this._retrieveToken())
         return this.get<client>('client/', {}, {
             headers: {
                 "Authorization": `Bearer ${this._retrieveToken()}`

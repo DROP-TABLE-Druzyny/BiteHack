@@ -16,7 +16,7 @@ export default function LoginForm({ onSubmit }: LoginFormProps) {
 
     return (
         <form onSubmit={handleSubmit} className="flex flex-col items-center mt-16">
-            <PhoneInput label='Podaj swój numer telefonu' className='font-semibold w-44 text-xl' value={phoneNumber} onChange={setPhoneNumber} />
+            <PhoneInput label='Podaj swój numer telefonu' className='font-semibold text-2xl md:text-2xl w-52' value={phoneNumber} onChange={setPhoneNumber} />
             <Button label='Kontynuuj' className='mt-4 text-lg font-semibold' />
         </form>
     );

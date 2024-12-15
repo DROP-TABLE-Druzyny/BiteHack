@@ -2,25 +2,29 @@
 
 import React, { useEffect, useState } from "react";
 import Header from "@/app/ui/login/header";
-import { publicService } from "@/services";
+import { clientService, publicService } from "@/services";
 import { HelpRequest } from "@/services/HelpRequest";
 import RequestItem from "../ui/pomocnik/prosba/request-item";
-import { ShoppingCartIcon } from "@heroicons/react/24/outline";
+import {
+    TruckIcon,
+    ShoppingCartIcon,
+    HeartIcon,
+    UsersIcon,
+    ShieldCheckIcon,
+    QuestionMarkCircleIcon,
+  } from "@heroicons/react/24/outline";
 import { formatDistanceToNow } from "date-fns";
 import { pl } from 'date-fns/locale'
-import { useAuth } from "@/context/AuthContext";
 import { useRouter } from 'next/navigation'
 const Page = () => {
     const [items, setItems] = useState<HelpRequest[]>([]);
-
-    const { getClientData } = useAuth();
     const router = useRouter()
 
     useEffect(() => {
         const fetchUser = async () => {
             let client = null
             try {
-                client = await getClientData()
+                client = await clientService.isLoggedIn()
             }
             finally
             {
@@ -43,6 +47,15 @@ const Page = () => {
         fetchUser();
         fetchItems();
     }, []);
+
+    const tilesData = {
+        SHOPPING: { title: "Zakupy", icon: ShoppingCartIcon },
+        MEDICAL: { title: "Medyczna", icon: ShieldCheckIcon },
+        TRANSPORT: { title: "Transport", icon: TruckIcon },
+        CARE: { title: "Opieka", icon: HeartIcon },
+        WALK: { title: "Spacer", icon: UsersIcon },
+        OTHER: { title: "Inne", icon: QuestionMarkCircleIcon },
+    };
     return (
         <div className="flex min-h-screen p-8 w-full justify-center w-100">
             <main className="flex flex-col items-center">
@@ -51,7 +64,7 @@ const Page = () => {
                 <div className="flex flex-col items-center mt-2 w-full">
                         {items.length > 0 ? (
                             items.map((item, index) => (
-                                <RequestItem key={index} category="Nieokreślona" categoryIcon={ShoppingCartIcon} timeLeft={"Pozostało: " + formatDistanceToNow(item.expiration, {locale: pl})} location="Kraków Arena" status="pending" />
+                                <RequestItem key={index} category={tilesData[item.type].title} categoryIcon={tilesData[item.type].icon} timeLeft={"Pozostało: " + formatDistanceToNow(item.expiration, {locale: pl})} location="Kraków Arena" status="pending" />
                             ))
                         ) : (
                             <p>No items found</p>
