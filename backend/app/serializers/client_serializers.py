@@ -10,7 +10,7 @@ class ClientModelSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Client
-        fields = ['id', 'name', 'phone', 'access_token', 'pins']
+        fields = ['id', 'name', 'phone', 'access_token', 'custom_pins']
         read_only_fields = ['access_token']
 
     def create(self, validated_data):
@@ -29,10 +29,10 @@ class ClientModelSerializer(serializers.ModelSerializer):
         """Method to create a new client"""
 
         # Validate phone number
-        if not validated_data['pins']:
+        if not validated_data['custom_pins']:
             raise ValidationError({'detail': 'New pin list is required.'})
 
-        instance['pins'] = validated_data['pins']
+        instance['custom_pins'] = validated_data['custom_pins']
         instance.save()
         
         return instance
