@@ -94,7 +94,11 @@ export class PublicDjangoService extends ApiService implements IPublicService {
         return this.patch<void, Partial<HelpRequest>>(`help-request/${id}/`, data);
     }
     public async createHelpRequest(data: HelpRequest): Promise<HelpRequest> {
-        return this.post<HelpRequest, HelpRequest>('help-request/', data);
+        return this.post<HelpRequest, HelpRequest>('help-request/', data, {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+            }
+        });
     }
     public async completeHelpRequest(id: number): Promise<void> {
         return this.post<void, {}>(`help-request/${id}/complete/`, {});

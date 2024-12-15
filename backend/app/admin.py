@@ -73,6 +73,7 @@ class HelpRequestAdmin(admin.ModelAdmin):
                 setattr(help_request, field, value)
             help_request.save()
         
+        form.cleaned_data['author'] = form.cleaned_data['author'].id
         serializer = HelpRequestSerializer(data=form.cleaned_data)
 
         if serializer.is_valid():

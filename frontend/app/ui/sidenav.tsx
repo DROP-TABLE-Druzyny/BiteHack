@@ -1,14 +1,7 @@
-import Link from 'next/link';
-import NavLinks from '@/app/ui/nav-links';
-import SomeLogo from '@/app/ui/some-logo';
-import { PowerIcon } from '@heroicons/react/24/outline';
-//import { signOut } from '@/auth';
+import Link from "next/link";
+import SomeLogo from "@/app/ui/some-logo";
 
-export default function SideNav({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function SideNav({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex h-full flex-col px-3 py-4 md:px-2 ">
       <Link
@@ -23,7 +16,6 @@ export default function SideNav({
         {children}
 
         <div className="hidden h-auto w-full grow rounded-xl bg-gray-50 md:block"></div>
-        
       </div>
     </div>
   );
