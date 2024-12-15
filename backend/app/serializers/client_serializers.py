@@ -27,11 +27,12 @@ class ClientModelSerializer(serializers.ModelSerializer):
 
 class HelpRequestSerializer(serializers.ModelSerializer):
     """Model serializer for the HelpRequest model"""
+    # TODO: NIE DZIALA POZDRO
 
     class Meta:
         model = HelpRequest
         fields = ['id', 'author', 'description', 'latitude', 'longitude', 'created', 'expiration']
-        read_only_fields = ['author', 'created_at']
+        read_only_fields = ['created_at']
 
     def _default_expiration():
         return timezone.now() + timezone.timedelta(hours=3)   
@@ -39,11 +40,12 @@ class HelpRequestSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         """Method to create a new help request"""
 
-        client = validated_data['author']
-        if not client:
+        author = validated_data.get('author', None)
+        if not author:
             raise ValidationError({'detail': 'Author is required.'})
-        if not Client.objects.filter(id=client.id).exists():
+        if not Client.objects.filter(id=author.id).exists():
             raise ValidationError({'detail': 'Author does not exist.'})
+        validated_data['author'] = author.id
 
         if not validated_data['expiration']:
             validated_data['expiration'] = self._default_expiration()
@@ -52,7 +54,34 @@ class HelpRequestSerializer(serializers.ModelSerializer):
         if validated_data['expiration'] < validated_data['created']:
             raise ValidationError({'detail': 'Expiration date cannot be before the creation date.'})
 
+        validated_data['author'] = author.id
         help_request = HelpRequest.objects.create(**validated_data)
         help_request.save()
 
         return help_request
+    
+    def update(self, instance, validated_data):
+        """Method to update a help request"""
+
+        if 'author' in validated_data:
+            raise ValidationError({'detail': 'Author cannot be changed.'})
+        if 'created' in validated_data:
+            raise ValidationError({'detail': 'Creation date cannot be changed.'})
+        if 'expiration' in validated_data:
+            if validated_data['expiration'] < timezone.now():
+                raise ValidationError({'detail': 'Expiration date cannot be in the past.'})
+            if validated_data['expiration'] < instance.created:
+                raise ValidationError({'detail': 'Expiration date cannot be before the creation date.'})
+
+        if 'type' in validated_data:
+            if validated_data['type'] not in HelpRequest.TYPE_CHOICES:
+                raise ValidationError({'detail': 'Invalid type.'})
+        
+        instance.type = validated_data.get('type', instance.type)
+        instance.description = validated_data.get('description', instance.description)
+        instance.latitude = validated_data.get('latitude', instance.latitude)
+        instance.longitude = validated_data.get('longitude', instance.longitude)
+        instance.expiration = validated_data.get('expiration', instance.expiration)
+        instance.save()
+
+        return instance

@@ -1,7 +1,5 @@
 # misc imports
 import logging
-import random
-import string
 
 # django + rest framework imports
 from rest_framework import mixins, viewsets, status
@@ -274,10 +272,17 @@ class HelpRequestViewSet(
                 status=status.HTTP_400_BAD_REQUEST
             )
         
-        helprequest = self.get_object()
+        try:
+            helprequest = self.get_object()
+        except HelpRequest.DoesNotExist:
+            return Response(
+                {'detail': 'Help request does not exist.'},
+                status=status.HTTP_404_NOT_FOUND
+            )
 
+        serializer = HelpRequestSerializer(helprequest)
         return Response(
-            HelpRequestSerializer(helprequest).data,
+            serializer.data,
             status=status.HTTP_200_OK
         )
     
