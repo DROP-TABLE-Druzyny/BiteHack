@@ -222,7 +222,7 @@ class ClientViewSet(
     
     @action(detail=False, methods=['post'], authentication_classes=[], permission_classes=[])
     def pins(self, request, phone=None):
-        """Update the client's pins"""
+        """Update the client's custom_pins"""
 
         client = check_auth(request)
         if not client:
@@ -231,7 +231,7 @@ class ClientViewSet(
                 status=status.HTTP_401_UNAUTHORIZED
             )
 
-        client.pins = request.data.get('pins', [])
+        client.custom_pins = request.data.get('custom_pins', [])
         client.save()
 
         return Response({'detail': 'Pins updated.'}, status=status.HTTP_200_OK)
