@@ -12,15 +12,21 @@ import {
   QuestionMarkCircleIcon,
 } from "@heroicons/react/24/outline";
 
+import { publicService } from "@/services";
+
 import TimeDropdown from "@/app/ui/pomocnik/prosba/time-dropdown";
 import React, { useState } from "react";
 import clsx from "clsx";
+import { HelpRequestTypes } from "@/services/HelpRequest";
 
 const Page = () => {
   const [selectedTile, setSelectedTile] = useState<string | null>(null);
   const [timeDropdownValue, setTimeDropdownValue] = useState(null);
   const [isLocateButtonClicked, setIsLocateButtonClicked] = useState("");
-  const [location, setLocation] = useState<{ latitude: number; longitude: number } | null>(null);
+  const [location, setLocation] = useState<{
+    latitude: number;
+    longitude: number;
+  } | null>(null);
 
   const tilesData = [
     { title: "Zakupy", icon: ShoppingCartIcon, value: "SHOPPING" },
@@ -32,11 +38,10 @@ const Page = () => {
   ];
 
   const handleTileClick = (title: string) => {
-    console.log("handling it");
     setSelectedTile(title);
   };
 
-  const handleTimeDropdownChange = (value:any) => {
+  const handleTimeDropdownChange = (value: any) => {
     setTimeDropdownValue(value);
   };
 
@@ -65,18 +70,26 @@ const Page = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (!location || !timeDropdownValue) {
+      console.error("Location not set");
+      return;
+    }
 
-    fetch(event.currentTarget.action, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        'type': selectedTile,
-        'time': timeDropdownValue,
-        'location': location,
-        
-      }),
+    const hoursToAdd = parseInt(timeDropdownValue, 10);
+    const expirationDate = new Date();
+    expirationDate.setHours(expirationDate.getHours() + hoursToAdd);
+
+    publicService.createHelpRequest({
+      type: selectedTile as HelpRequestTypes,
+      longitude: location.longitude,
+      latitude: location.latitude,
+      expiration: expirationDate.toISOString(),
+      id: 0,
+      author: 0,
+      description: "",
+      created: "",
+      accepted_by: null,
+      completed: false,
     });
   };
 
@@ -85,14 +98,17 @@ const Page = () => {
       <main className="flex flex-col items-center">
         <Header text="Prośba" backUrl="/" />
 
-        <form className="flex flex-col items-center mt-2" action="/your-form-action-url" onSubmit={handleSubmit}>
-          
+        <form
+          className="flex flex-col items-center mt-2"
+          action="/your-form-action-url"
+          onSubmit={handleSubmit}
+        >
           <div className="grid grid-cols-3 md:grid-cols-3 gap-4 mt-8">
             {tilesData.map((tileData, idx) => (
               <RequestTypeTile
                 key={idx}
                 tileData={tileData}
-                isSelected={selectedTile === tileData.title}
+                isSelected={selectedTile === tileData.value}
                 onClick={() => handleTileClick(tileData.value)}
               />
             ))}
@@ -104,7 +120,7 @@ const Page = () => {
               "opacity-0": selectedTile === null,
             })}
           >
-            <TimeDropdown onChange={handleTimeDropdownChange}/>
+            <TimeDropdown onChange={handleTimeDropdownChange} />
           </div>
 
           <Button
@@ -120,7 +136,6 @@ const Page = () => {
             onClick={handleLocateClick}
           />
 
-          
           <Button
             type="submit"
             label="Dodaj prośbę"
@@ -132,7 +147,6 @@ const Page = () => {
               }
             )}
           />
-        
         </form>
       </main>
     </div>
