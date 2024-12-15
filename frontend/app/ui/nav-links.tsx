@@ -22,7 +22,7 @@ const links = [
     href: '/zdrowie', 
     icon: HeartIcon },
   {
-    name: 'Pomocnik',
+    name: 'Mój pomocnik',
     href: '/pomocnik',
     icon: LifebuoyIcon,
   },
