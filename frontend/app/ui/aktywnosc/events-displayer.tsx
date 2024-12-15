@@ -27,7 +27,7 @@ export default function EventsDisplayer() {
   };
 
   return (
-    <Accordion className="" type="single" collapsible>
+    <Accordion className="md:overflow-y-scroll" type="single" collapsible>
       {events.map((event) => (
         <AccordionItem
           key={event.id}
