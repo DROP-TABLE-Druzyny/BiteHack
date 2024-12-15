@@ -18,6 +18,7 @@ import TimeDropdown from "@/app/ui/pomocnik/prosba/time-dropdown";
 import React, { useState } from "react";
 import clsx from "clsx";
 import { HelpRequestTypes } from "@/services/HelpRequest";
+import { useRouter } from "next/navigation";
 
 const Page = () => {
   const [selectedTile, setSelectedTile] = useState<string | null>(null);
@@ -27,7 +28,7 @@ const Page = () => {
     latitude: number;
     longitude: number;
   } | null>(null);
-
+  const router = useRouter();
   const tilesData = [
     { title: "Zakupy", icon: ShoppingCartIcon, value: "SHOPPING" },
     { title: "Medyczna", icon: ShieldCheckIcon, value: "MEDICAL" },
@@ -91,12 +92,13 @@ const Page = () => {
       accepted_by: null,
       completed: false,
     });
+    router.push('/pomocnik');
   };
 
   return (
     <div className="flex min-h-screen p-8 w-full justify-center">
       <main className="flex flex-col items-center">
-        <Header text="Prośba" backUrl="/" />
+        <Header text="Prośba" backUrl="/pomocnik" />
 
         <form
           className="flex flex-col items-center mt-2"
