@@ -1,9 +1,11 @@
 'use client'
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { InformationCircleIcon, MapIcon, UserGroupIcon, HeartIcon } from '@heroicons/react/24/outline';
 import NavItem from './navitem';
 import { Search } from 'lucide-react';
+import { useAuth } from '@/context/AuthContext';
+import { SearchItem } from '@/services/Search';
 
 export interface NavItemProps {
   href: string;
@@ -26,13 +28,42 @@ const Navigation: React.FC = () => {
     { href: '/aktywnosc', icon: MapIcon, label: 'Wydarzenia', radius: 90},
   ]);
 
-  const [userItems, setUserItems] = useState<NavItemProps[]>([
-    { href: '/zdrowie', icon: HeartIcon, label: 'Zdrowie', radius: 50},
-    { href: '/informacje', icon: InformationCircleIcon, label: 'Informacje', radius: 50 },
-    { href: '/pomocnik', icon: UserGroupIcon, label: 'Pomocnik', radius: 50 },
-    { href: '/pomocnik', icon: UserGroupIcon, label: 'Pomocnik', radius: 50 },
-    { href: '/pomocnik', icon: UserGroupIcon, label: 'Pomocnik', radius: 50 },
-  ]);
+  const [userItems, setUserItems] = useState<NavItemProps[]>([]);
+
+  // Function to parse cookies
+  const getCookie = (name: string): string | null => {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) {
+      try {
+        return decodeURIComponent(parts.pop()?.split(";").shift() || ""); // Decode the cookie value
+      } catch (error) {
+        console.error(`Error decoding cookie: ${error}`);
+        return null;
+      }
+    }
+    return null;
+  };
+
+  useEffect(() => {
+    // Fetch custom user items from cookies
+    const savedLinks = getCookie('savedLinks');
+    if (savedLinks) {
+      try {
+        const parsedLinks: SearchItem[] = JSON.parse(savedLinks);
+        // Map SearchItem objects to NavItemProps
+        const transformedLinks: NavItemProps[] = parsedLinks.map((link) => ({
+          href: link.url,
+          icon: UserGroupIcon, // Default icon, can customize based on categories
+          label: link.title,
+          radius: 50, 
+        }));
+        setUserItems(transformedLinks);
+      } catch (error) {
+        console.error('Failed to parse saved links from cookies:', error);
+      }
+    }
+  }, []);
 
   const getPosition = (radius: number, angle: number, dist: number) => {
     const rad = (Math.PI / 180) * angle;
@@ -96,9 +127,30 @@ const Navigation: React.FC = () => {
   }
 
   return (
-    <div className="relative flex justify-center items-center w-80 md:w-96 h-80 md:h-96">
-      <NavItems/>
+    <div>
+      <div className="relative hidden md:flex justify-center items-center w-80 md:w-96 h-80 md:h-96">
+        <NavItems/>
+      </div>
+      <div className='mt-12 flex flex-col md:hidden'>
+      {items.map((item) => (
+        <a href={item.href}>
+          <div className='p-4 flex gap-2 items-center text-white text-4xl mb-8 font-extrabold bg-amber-600 border-white rounded-full shadow-lg drop-shadow-md'>
+            <item.icon className={`w-6 h-6 text-white`} />
+            {item.label}
+          </div>
+        </a>
+        ))}
+        {userItems.map((item) => (
+          <a href={item.href}>
+          <div className='p-4 flex gap-2 items-center text-white text-4xl mb-8 font-extrabold bg-cyan-500 border-white rounded-full shadow-lg drop-shadow-md'>
+            <item.icon className={`w-6 h-6 text-white`} />
+            {item.label}
+          </div>
+        </a>
+        ))}
+      </div>
     </div>
+    
   );
 };
 

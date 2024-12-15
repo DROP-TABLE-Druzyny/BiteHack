@@ -6,13 +6,15 @@ import React from 'react'
 interface SearchItemsProps
 {
     item: SearchItem
+    onFavorite: () => void
+    favorites: Set<string>
 }
-export default function SearchResult({ item }: SearchItemsProps) {
+export default function SearchResult({ item, onFavorite, favorites }: SearchItemsProps) {
   function OnStar(event: React.MouseEvent)
   {
     event.stopPropagation();
     event.preventDefault();
-    console.log("TEST")
+    onFavorite();
   }
   return (
     <LinkPreview url={item.url}>
@@ -20,7 +22,7 @@ export default function SearchResult({ item }: SearchItemsProps) {
         <div className='flex justify-between'>
           <h3 className='text-lg font-bold'>{item.title}</h3>
           <div className='p-2 hover:bg-amber-400 rounded-full transition ease-in-out duration-500'>
-            <Star onClick={OnStar} size={32}/>
+            {!favorites.has(item.url) ? <Star onClick={OnStar} size={32}/> : <Star fill={'#000'} onClick={OnStar} size={32}/>}
           </div>
           
         </div>

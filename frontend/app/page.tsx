@@ -11,6 +11,7 @@ export default function Page() {
   const [user, setUser] = useState<client | null>(null);
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
+  
 
   useEffect(() => {
     clientService.isLoggedIn().then(async (isLoggedIn) => {

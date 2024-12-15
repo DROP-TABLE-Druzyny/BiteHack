@@ -14,7 +14,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     );
 };
     
-export const useMapContext = () => {
+export const useAuth = () => {
     const context = useContext(AuthContext);
     if (!context) {
     throw new Error('useMapContext must be used within a MapProvider');
