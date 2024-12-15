@@ -27,7 +27,6 @@ class ClientModelSerializer(serializers.ModelSerializer):
 
 class HelpRequestSerializer(serializers.ModelSerializer):
     """Model serializer for the HelpRequest model"""
-    # TODO: NIE DZIALA POZDRO
 
     class Meta:
         model = HelpRequest
@@ -39,13 +38,14 @@ class HelpRequestSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         """Method to create a new help request"""
+        validated_data['created'] = timezone.now()
 
         author = validated_data.get('author', None)
         if not author:
             raise ValidationError({'detail': 'Author is required.'})
         if not Client.objects.filter(id=author.id).exists():
             raise ValidationError({'detail': 'Author does not exist.'})
-        validated_data['author'] = author.id
+        validated_data['author'] = Client.objects.get(id=author.id)
 
         if not validated_data['expiration']:
             validated_data['expiration'] = self._default_expiration()
@@ -54,7 +54,6 @@ class HelpRequestSerializer(serializers.ModelSerializer):
         if validated_data['expiration'] < validated_data['created']:
             raise ValidationError({'detail': 'Expiration date cannot be before the creation date.'})
 
-        validated_data['author'] = author.id
         help_request = HelpRequest.objects.create(**validated_data)
         help_request.save()
 
@@ -77,6 +76,7 @@ class HelpRequestSerializer(serializers.ModelSerializer):
             if validated_data['type'] not in HelpRequest.TYPE_CHOICES:
                 raise ValidationError({'detail': 'Invalid type.'})
         
+        instance.author = validated_data.get('author', instance.author)
         instance.type = validated_data.get('type', instance.type)
         instance.description = validated_data.get('description', instance.description)
         instance.latitude = validated_data.get('latitude', instance.latitude)

@@ -295,10 +295,11 @@ class HelpRequestViewSet(
                 {'detail': 'Authentication credentials were not provided.'},
                 status=status.HTTP_401_UNAUTHORIZED
             )
-
-        serializer = HelpRequestSerializer(data=request.data)
+        data = request.data.copy()
+        data['author'] = client.id
+        serializer = HelpRequestSerializer(data=data)
         if serializer.is_valid():
-            serializer.save(author=client)
+            serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
         logger.error("Validation error's occured when creating a new help request: %s", serializer.errors)
