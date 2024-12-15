@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react';
 import { InformationCircleIcon, MapIcon, UserGroupIcon, HeartIcon } from '@heroicons/react/24/outline';
 import NavItem from './navitem';
 import { Search } from 'lucide-react';
-import { useAuth } from '@/context/AuthContext';
 import { SearchItem } from '@/services/Search';
 
 export interface NavItemProps {

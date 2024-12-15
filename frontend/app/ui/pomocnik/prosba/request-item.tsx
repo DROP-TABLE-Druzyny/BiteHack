@@ -1,5 +1,5 @@
 import React from 'react'
-import { ClockIcon, MapPinIcon, UserIcon } from '@heroicons/react/24/outline'
+import { ClockIcon, UserIcon } from '@heroicons/react/24/outline'
 
 interface RequestItemProps {
   category: string
@@ -13,7 +13,6 @@ const RequestItem: React.FC<RequestItemProps> = ({
   category,
   categoryIcon: CategoryIcon,
   timeLeft,
-  location,
   status
 }) => {
   const statusColors = {
