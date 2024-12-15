@@ -1,5 +1,5 @@
 import React from 'react'
-import { ClockIcon, MapPinIcon } from '@heroicons/react/24/outline'
+import { ClockIcon, MapPinIcon, UserIcon } from '@heroicons/react/24/outline'
 
 interface RequestItemProps {
   category: string
@@ -29,16 +29,20 @@ const RequestItem: React.FC<RequestItemProps> = ({
             <CategoryIcon className="h-8 w-8 drop-shadow-md" />
           </div>
           <div className="flex-grow min-w-0">
-            <p className="text-sm font-medium truncate drop-shadow-md">
-              {category}
+            <p className="text-md font-bold truncate drop-shadow-md">
+              Kategoria: {category}
             </p>
-            <div className="flex items-center text-xs space-x-2">
-              <ClockIcon className="h-3 w-3 drop-shadow-md" />
+            <div className="flex items-center text-md space-x-2">
+              <ClockIcon className="h-4 w-4 drop-shadow-md" />
               <span className='drop-shadow-md'>{timeLeft}</span>
             </div>
-            <div className="flex items-center text-xs space-x-2">
-              <MapPinIcon className="h-3 w-3 drop-shadow-md" />
+            {/* <div className="flex items-center text-md space-x-2">
+              <MapPinIcon className="h-4 w-4 drop-shadow-md" />
               <span className="truncate drop-shadow-md">{location}</span>
+            </div> */}
+            <div className="flex items-center text-md space-x-2">
+              <UserIcon className="h-4 w-4 drop-shadow-md" />
+              <span className="truncate drop-shadow-md">Oczekuje na przyjęcie</span>
             </div>
           </div>
           <div className={`w-3 h-3 shadow-md rounded-full ${statusColors[status]}`} />
