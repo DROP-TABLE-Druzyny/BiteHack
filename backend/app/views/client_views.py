@@ -46,7 +46,7 @@ class ClientViewSet(
     def _generate_random_code(length=6):
         return '123456'
     
-    def _check_random_code(code):
+    def _check_random_code(self, code):
         # temporary code
         return code == '123456'
     
@@ -151,6 +151,7 @@ class ClientViewSet(
             )
 
         random_code = request.data.get('code', None)
+        print(random_code)
         if not random_code:
             return Response(
                 {'detail': 'Code is required.'},
@@ -170,10 +171,7 @@ class ClientViewSet(
                 status=status.HTTP_200_OK
             )
         except Client.DoesNotExist:
-            return Response(
-                {'detail': 'Invalid phone number.'},
-                status=status.HTTP_400_BAD_REQUEST
-            )
+            return self.create(request)
     
     @action(detail=False, methods=['get'], authentication_classes=[], permission_classes=[])
     def authenticated(self, request):
