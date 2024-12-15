@@ -10,7 +10,7 @@ class ClientModelSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Client
-        fields = ['id', 'name', 'phone', 'access_token']
+        fields = ['id', 'name', 'phone', 'access_token', 'pins']
         read_only_fields = ['access_token']
 
     def create(self, validated_data):
