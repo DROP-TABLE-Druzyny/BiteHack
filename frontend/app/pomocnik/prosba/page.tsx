@@ -72,14 +72,14 @@ const Page = () => {
               "opacity-0": selectedTile === null,
             })}
           >
-            <TimeDropdown onChange={handleTimeDropdownChange} />
+            <TimeDropdown onChange={handleTimeDropdownChange}/>
           </div>
 
           <Button
             type="button"
             label="Lokalizuj"
             className={clsx(
-              "mt-20 text-3xl font-semibold px-12 py-4 transition-opacity duration-500",
+              "mt-20 text-3xl font-semibold py-4 pr-12 pl-12 transition-opacity duration-500",
               {
                 "opacity-100": timeDropdownValue !== null,
                 "opacity-0": timeDropdownValue === null,

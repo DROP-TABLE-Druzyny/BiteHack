@@ -22,7 +22,6 @@ export default function RequestTypeTile({ tileData,isSelected, onClick }: TileDa
       icon={TileIcon}
       label={tileData.title}
       radius={radius}
-      angle={angle}
       style={{
         position: "relative",
       }}

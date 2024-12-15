@@ -27,13 +27,13 @@ export default function TimeDropdown({ onChange } :{onChange: (value: string) =>
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="default" className="bg-amber-600 border-2 px-4 py-2 border-white rounded-full shadow-lg hover:bg-amber-700 transition duration-300 ease-in-out transform hover:scale-105 text-2xl p-8">
+        <Button variant="default" className="bg-amber-600 border-2 px-4 py-2 border-white rounded-full shadow-lg hover:bg-amber-700 transition duration-300 ease-in-out transform hover:scale-105 text-3xl p-8">
           {selectedValue ? `Wybrano: ${options[selectedValue]}` : 'Jak długo mogę czekać'}
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-72 p-2">
+      <DropdownMenuContent className="w-96 p-2">
         {Object.entries(options).map(([value, label]) => (
-          <DropdownMenuItem key={value} onClick={() => handleItemClick(value)}>
+          <DropdownMenuItem key={value} onClick={() => handleItemClick(value)} className='text-lg p-2'>
             {label}
           </DropdownMenuItem>
         ))}
