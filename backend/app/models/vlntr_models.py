@@ -20,9 +20,8 @@ class VolounteerAccountManager(BaseUserManager):
         if not name:
             raise ValueError('Name is required')
 
-        user = self.model(phone=phone, **extra_fields)
+        user = self.model(phone=phone, name=name, **extra_fields)
         user.set_password(password)
-        user.set_name('name-{}'.format(str(uuid.uuid4())))
         user.save(using=self._db)
 
         return user
@@ -81,3 +80,11 @@ class Volounteer(AbstractBaseUser):
         """Method to generate a access token"""
 
         return str(uuid.uuid4())
+    
+    def save(self, *args, **kwargs):
+        """Method to save the Volounteer model"""
+
+        if not self.access_token:
+            self.access_token = self.generate_access_token()
+        
+        super(Volounteer, self).save(*args, **kwargs)

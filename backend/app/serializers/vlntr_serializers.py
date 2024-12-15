@@ -28,7 +28,7 @@ class VolounteerModelSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Volounteer
-        fields = ['id', 'name', 'phone']
+        fields = ['id', 'name', 'phone', 'password', 'referal_code', 'access_token']
     
     def create(self, validated_data):
         """Method to create a new client"""

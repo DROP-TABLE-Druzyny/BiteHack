@@ -7,6 +7,9 @@ from .serializers.serializers import LocalEventSerializer
 from .models.vlntr_models import ReferalCodes
 from .serializers.vlntr_serializers import ReferalCodesSerializer
 
+from .models.vlntr_models import Volounteer
+from .serializers.vlntr_serializers import VolounteerModelSerializer
+
 @admin.register(LocalEvent)
 class LocalEventAdmin(admin.ModelAdmin):
     list_display = ['name', 'data_start', 'description']
@@ -43,6 +46,26 @@ class ReferalCodesAdmin(admin.ModelAdmin):
             referal_code.save()
         
         serializer = ReferalCodesSerializer(data=form.cleaned_data)
+
+        if serializer.is_valid():
+            serializer.save()
+        else:
+            raise serializers.ValidationError(serializer.errors)
+
+@admin.register(Volounteer)
+class VolounteerAdmin(admin.ModelAdmin):
+    list_display = ['name', 'phone']
+    search_fields = ['name', 'phone']
+    ordering = ['name',]
+
+    def save_model(self, request, obj, form, change):
+        if Volounteer.objects.filter(phone=form.cleaned_data['phone']).exists():
+            volounteer = Volounteer.objects.get(phone=form.cleaned_data['phone'])
+            for field, value in form.cleaned_data.items():
+                setattr(volounteer, field, value)
+            volounteer.save()
+        
+        serializer = VolounteerModelSerializer(data=form.cleaned_data)
 
         if serializer.is_valid():
             serializer.save()
