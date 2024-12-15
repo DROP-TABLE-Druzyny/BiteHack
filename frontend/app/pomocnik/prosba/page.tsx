@@ -29,6 +29,7 @@ export type HelpRequestTypes =
 const Page = () => {
   const [selectedTile, setSelectedTile] = useState<string | null>(null);
   const [timeDropdownValue, setTimeDropdownValue] = useState(null);
+  const [isLocateButtonClicked, setIsLocateButtonClicked] = useState("");
 
   const tilesData = [
     { title: "Zakupy", icon: ShoppingCartIcon },
@@ -75,6 +76,7 @@ const Page = () => {
           </div>
 
           <Button
+            type="button"
             label="Lokalizuj"
             className={clsx(
               "mt-20 text-3xl font-semibold px-12 py-4 transition-opacity duration-500",
@@ -83,18 +85,22 @@ const Page = () => {
                 "opacity-0": timeDropdownValue === null,
               }
             )}
+            onClick={() => setIsLocateButtonClicked("value")}
           />
 
+          
           <Button
+            type="submit"
             label="Dodaj prośbę"
             className={clsx(
               "mt-4 text-3xl font-semibold px-8 py-4 transition-opacity duration-1000",
               {
-                "opacity-100": timeDropdownValue !== null,
-                "opacity-0": timeDropdownValue === null,
+                "opacity-100": isLocateButtonClicked !== "",
+                "opacity-0": isLocateButtonClicked === "",
               }
             )}
           />
+        
         </form>
       </main>
     </div>

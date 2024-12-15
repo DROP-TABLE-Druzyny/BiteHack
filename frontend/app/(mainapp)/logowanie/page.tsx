@@ -41,7 +41,7 @@ export default function Page() {
         <Header text='Logowanie' backUrl='/'/>
         <form onSubmit={handleSubmit} className="flex flex-col items-center mt-16">
           <PhoneInput label='Podaj swój numer telefonu' className='font-semibold w-44 text-xl' value={phoneNumber} onChange={setPhoneNumber} />
-          <Button label='Kontynuuj' className='mt-4 text-lg font-semibold' />
+          <Button type="submit" label='Kontynuuj' className='mt-4 text-lg font-semibold' />
         </form>
       </main>
     </div>

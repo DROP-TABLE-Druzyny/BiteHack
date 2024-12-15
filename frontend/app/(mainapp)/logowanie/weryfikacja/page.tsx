@@ -39,7 +39,7 @@ export default function Page() {
         <Header text='Potwierdzenie' backUrl='/logowanie'/>
         <form onSubmit={handleSubmit} method="post" className="flex flex-col items-center mt-16">
             <AuthCodeInput label='Wpisz kod otrzymany w wiadomości SMS' className='font-semibold w-32 text-xl' value={authCode} onChange={setAuthCode} />
-          <Button label='Kontynuuj' className='mt-4 text-lg font-semibold'/>
+          <Button type="submit" label='Kontynuuj' className='mt-4 text-lg font-semibold'/>
         </form>
       </main>
     </div>
