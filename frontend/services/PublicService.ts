@@ -25,7 +25,7 @@ export interface IPublicService {
 export class PublicDjangoService extends ApiService implements IPublicService {
     constructor() {
         const axiosInstance = axios.create({
-            baseURL: 'http://localhost:8000/api/',
+            baseURL: 'http://192.168.1.148:8000/api/',
         });
 
         // if the last request was unauthorized, try to refresh the token

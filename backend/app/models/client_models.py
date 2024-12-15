@@ -4,11 +4,12 @@ from phone_field import PhoneField
 # django imports
 from django.contrib.auth import models as auth_models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.utils import timezone
 from django.db import models
 
 class ClientAccountManager(BaseUserManager):
     def create_user(self, phone, password=None, **extra_fields):
-        """Method to create a client user"""
+        """Method to create a standard user"""
 
         if not phone:
             raise ValueError('Phone number is required')
