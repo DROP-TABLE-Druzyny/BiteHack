@@ -33,12 +33,12 @@ const Page = () => {
   const [location, setLocation] = useState<{ latitude: number; longitude: number } | null>(null);
 
   const tilesData = [
-    { title: "Zakupy", icon: ShoppingCartIcon },
-    { title: "Medyczna", icon: ShieldCheckIcon },
-    { title: "Transport", icon: TruckIcon },
-    { title: "Opieka", icon: HeartIcon },
-    { title: "Spacer", icon: UsersIcon },
-    { title: "Inne", icon: QuestionMarkCircleIcon },
+    { title: "Zakupy", icon: ShoppingCartIcon, value: "SHOPPING" },
+    { title: "Medyczna", icon: ShieldCheckIcon, value: "MEDICAL" },
+    { title: "Transport", icon: TruckIcon, value: "TRANSPORT" },
+    { title: "Opieka", icon: HeartIcon, value: "CARE" },
+    { title: "Spacer", icon: UsersIcon, value: "WALK" },
+    { title: "Inne", icon: QuestionMarkCircleIcon, value: "OTHER" },
   ];
 
   const handleTileClick = (title: string) => {
@@ -85,7 +85,7 @@ const Page = () => {
                 key={idx}
                 tileData={tileData}
                 isSelected={selectedTile === tileData.title}
-                onClick={() => handleTileClick(tileData.title)}
+                onClick={() => handleTileClick(tileData.value)}
               />
             ))}
           </div>
