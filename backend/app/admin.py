@@ -4,6 +4,12 @@ from django.contrib import admin
 from .models.models import LocalEvent
 from .serializers.serializers import LocalEventSerializer
 
+from .models.client_models import Client
+from .serializers.client_serializers import ClientModelSerializer
+
+from .models.client_models import HelpRequest
+from .serializers.client_serializers import HelpRequestSerializer
+
 from .models.vlntr_models import ReferalCodes
 from .serializers.vlntr_serializers import ReferalCodesSerializer
 
@@ -31,7 +37,49 @@ class LocalEventAdmin(admin.ModelAdmin):
             serializer.save()
         else:
             raise serializers.ValidationError(serializer.errors)
+
+@admin.register(Client)
+class ClientAdmin(admin.ModelAdmin):
+    list_display = ['name', 'phone']
+    search_fields = ['name', 'phone']
+    ordering = ['name',]
+
+    def save_model(self, request, obj, form, change):
+        if Client.objects.filter(phone=form.cleaned_data['phone']).exists():
+            client = Client.objects.get(phone=form.cleaned_data['phone'])
+            for field, value in form.cleaned_data.items():
+                setattr(client, field, value)
+            client.save()
         
+        serializer = ClientModelSerializer(data=form.cleaned_data)
+
+        if serializer.is_valid():
+            serializer.save()
+        else:
+            raise serializers.ValidationError(serializer.errors)
+
+@admin.register(HelpRequest)
+class HelpRequestAdmin(admin.ModelAdmin):
+    list_display = ['author', 'description']
+    search_fields = ['author', 'description']
+    list_filter = ['created', 'expiration']
+    date_hierarchy = 'created'
+    ordering = ['created',]
+
+    def save_model(self, request, obj, form, change):
+        if HelpRequest.objects.filter(description=form.cleaned_data['description']).exists():
+            help_request = HelpRequest.objects.get(description=form.cleaned_data['description'])
+            for field, value in form.cleaned_data.items():
+                setattr(help_request, field, value)
+            help_request.save()
+        
+        serializer = HelpRequestSerializer(data=form.cleaned_data)
+
+        if serializer.is_valid():
+            serializer.save()
+        else:
+            raise serializers.ValidationError(serializer.errors)
+
 @admin.register(ReferalCodes)
 class ReferalCodesAdmin(admin.ModelAdmin):
     list_display = ['name', 'code']
