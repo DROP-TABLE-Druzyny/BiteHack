@@ -82,6 +82,21 @@ class ClientViewSet(
             status=status.HTTP_200_OK
         )
 
+    def list(self, request, *args, **kwargs):
+        """Retrieve a client"""
+
+        client = check_auth(request)
+        if not client:
+            return Response(
+                {'detail': 'Authentication credentials were not provided.'},
+                status=status.HTTP_401_UNAUTHORIZED
+            )
+
+        return Response(
+            ClientModelSerializer(client).data,
+            status=status.HTTP_200_OK
+        )
+    
     def create(self, request):
         """Create a new client"""
 
@@ -149,7 +164,7 @@ class ClientViewSet(
             )
 
         random_code = request.data.get('code', None)
-        print(random_code)
+
         if not random_code:
             return Response(
                 {'detail': 'Code is required.'},
@@ -164,8 +179,9 @@ class ClientViewSet(
 
         try:
             user = Client.objects.get(phone=phone)
+            serializer = ClientModelSerializer(user)
             return Response(
-                {'access_token': user.access_token},
+                serializer.data,
                 status=status.HTTP_200_OK
             )
         except Client.DoesNotExist:
@@ -259,7 +275,7 @@ class HelpRequestViewSet(
         queryset = self.get_queryset()
         queryset.filter(completed=False)
         queryset.order_by('created')
-        
+
         helprequests = queryset
 
         return Response(

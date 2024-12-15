@@ -17,10 +17,10 @@ import SideNavMain from "@/app/ui/sidenav-main";
 
 export const metadata: Metadata = {
   title: {
-    template: '%s | LiveActive',
-    default: 'LiveActive',
+    template: '%s | GoldenAge',
+    default: 'GoldenAge',
   },
-  description: 'Example site called LiveActive',
+  description: 'Example site called GoldenAge',
 };
 
 export default function Layout({

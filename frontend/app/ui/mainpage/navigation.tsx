@@ -18,11 +18,11 @@ const Navigation: React.FC = () => {
   const dist_far = 120;
 
   const [items, setItems] = useState<NavItemProps[]>([
-    { href: '/zdrowie', icon: HeartIcon, label: 'Zdrowie', radius: 60},
-    { href: '/aktywnosc', icon: MapIcon, label: 'Wydarzenia', radius: 60},
-    { href: '/pomocnik', icon: UserGroupIcon, label: 'Pomocnik', radius: 60 },
-    { href: '/wyszukiwanie', icon: Search, label: 'Wyszukiwarka', radius: 60},
-    { href: '/informacje', icon: InformationCircleIcon, label: 'Informacje', radius: 60 },
+    { href: '/zdrowie', icon: HeartIcon, label: 'Zdrowie', radius: 70},
+    { href: '/aktywnosc', icon: MapIcon, label: 'Wydarzenia', radius: 70},
+    { href: '/pomocnik', icon: UserGroupIcon, label: 'Pomocnik', radius: 70 },
+    { href: '/wyszukiwanie', icon: Search, label: 'Wyszukiwarka', radius: 70},
+    { href: '/informacje', icon: InformationCircleIcon, label: 'Informacje', radius: 70 },
   ]);
 
   const getPosition = (radius: number, angle: number, dist: number) => {

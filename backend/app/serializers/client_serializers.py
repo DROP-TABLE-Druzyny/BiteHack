@@ -30,7 +30,7 @@ class HelpRequestSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = HelpRequest
-        fields = ['id', 'author', 'description', 'latitude', 'longitude', 'created', 'expiration']
+        fields = ['id', 'author', 'description', 'latitude', 'longitude', 'created', 'expiration', 'type']
         read_only_fields = ['created_at']
 
     def _default_expiration():

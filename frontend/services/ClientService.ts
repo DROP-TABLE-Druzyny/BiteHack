@@ -1,6 +1,12 @@
 import axios from 'axios';
 import { ApiService } from './ApiService';
 
+export type client = {
+    name: string;
+    phone: string;
+    access_token: string;
+};
+
 export interface IClientService {
     generateRandomCode(phone: string): Promise<void>;
     register(phone: string, code: string): Promise<{}>; // TODO: set user type
@@ -8,6 +14,7 @@ export interface IClientService {
     logout(): void;
     updateName(name: string): Promise<void>;
     isLoggedIn(): Promise<boolean>;
+    getClientData(): Promise<client>;
 }
 
 export class ClientDjangoService extends ApiService implements IClientService {
@@ -56,5 +63,12 @@ export class ClientDjangoService extends ApiService implements IClientService {
         })
 
         return response.then(() => true).catch(() => false);
+    }
+    public async getClientData(): Promise<client> {
+        return this.get<client>('client/', {}, {
+            headers: {
+                "Authorization": `Bearer ${this._retrieveToken()}`
+            }
+        });
     }
 }
