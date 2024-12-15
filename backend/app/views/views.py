@@ -32,6 +32,9 @@ class UserViewSet(
     serializer_class = UserSerializer
     lookup_field = 'id'
 
+    @extend_schema(
+        summary="Register a new user",
+    )
     @action(detail=False, methods=['post'], authentication_classes=[], permission_classes=[])
     def register(self, request):
         """Register a new user"""
@@ -51,6 +54,9 @@ class UserViewSet(
         logger.error("Validation error's occured when creating a new user: %s", serializer.errors)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    @extend_schema(
+        summary="Login a user",
+    )
     @action(detail=False, methods=['post'])
     @ac([IsAuthenticated])
     def logout(self, request):
@@ -71,6 +77,9 @@ class UserViewSet(
         except Exception:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
+    @extend_schema(
+        summary="Get the current user's information based on the auth token",
+    )
     @ac([IsAuthenticated])
     def list(self, request):
         """Method to get the current user's information"""
@@ -91,6 +100,9 @@ class UserViewSet(
             'email': serializer.data['email'],
         })
 
+    @extend_schema(
+        summary="Get a user by ID",
+    )
     def retrieve(self, request, id=None):
         """Method to get a user by ID"""
         
@@ -141,6 +153,9 @@ class LocalEventViewSet(
 
         return queryset
 
+    @extend_schema(
+        summary="List all local events and sort them by distance if longitude and latitude are provided",
+    )
     @ac([])
     def list(self, request):
         """Method to list all local events"""
@@ -156,6 +171,9 @@ class LocalEventViewSet(
 
         return Response(data)
 
+    @extend_schema(
+        summary="Get a local event by ID",
+    )
     @ac([])
     def retrieve(self, request, id=None):
         """Method to get a local event by ID"""

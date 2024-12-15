@@ -8,7 +8,7 @@ from rest_framework.decorators import action, permission_classes as pc, authenti
 from rest_framework.permissions import IsAuthenticated
 
 # api documentation imports
-from drf_spectacular.utils import extend_schema, OpenApiParameter
+from drf_spectacular.utils import extend_schema, OpenApiParameter, OpenApiRequest
 
 # models and serializers
 from ..models.client_models import Client
@@ -51,6 +51,7 @@ class ClientViewSet(
         #TODO: Check if the code is valid and if it's linked to the given phone number
 
     @extend_schema(
+        summary='Send a random authorization code to the given phone number',
         responses={200: {'type': 'object', 'properties': {'code': {'type': 'string'}}}},
     )
     @action(detail=False, methods=['post'], authentication_classes=[], permission_classes=[])
@@ -82,6 +83,9 @@ class ClientViewSet(
             status=status.HTTP_200_OK
         )
 
+    @extend_schema(
+        summary='Retrieve the client information',
+    )
     def list(self, request, *args, **kwargs):
         """Retrieve a client"""
 
@@ -97,6 +101,9 @@ class ClientViewSet(
             status=status.HTTP_200_OK
         )
     
+    @extend_schema(
+        summary='Create a new client model',
+    )
     def create(self, request):
         """Create a new client"""
 
@@ -137,6 +144,9 @@ class ClientViewSet(
         logger.error("Validation error's occured when creating a new client: %s", serializer.errors)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
+    @extend_schema(
+        summary='Update the client information',
+    )
     def update(self, request, *args, **kwargs):
         """Update the client's information"""
 
@@ -151,7 +161,10 @@ class ClientViewSet(
 
         return Response({'detail': 'Client information updated.'}, status=status.HTTP_200_OK)
 
-    @extend_schema(responses={200: {'type': 'object', 'properties': {'access_token': {'type': 'string'}}}})
+    @extend_schema(
+        responses={200: {'type': 'object', 'properties': {'access_token': {'type': 'string'}}}},
+        summary='Login the client'
+    )
     @action(detail=True, methods=['post'])
     def login(self, request, phone=None):
         """Login the client"""
@@ -188,6 +201,9 @@ class ClientViewSet(
             request.data['phone'] = phone
             return self.create(request)
     
+    @extend_schema(
+        summary='Check if the user is authenticated',
+    )
     @action(detail=False, methods=['get'], authentication_classes=[], permission_classes=[])
     def authenticated(self, request):
         """Check if the user is authenticated"""
@@ -267,7 +283,8 @@ class HelpRequestViewSet(
                 description='Filter by the user who accepted the request',
                 default=None
             ),
-        ]
+        ],
+        summary='List all help requests',
     )
     def list(self, request):
         """List all help requests"""
@@ -283,6 +300,18 @@ class HelpRequestViewSet(
             status=status.HTTP_200_OK
         )
 
+    @extend_schema(
+        parameters=[
+            OpenApiParameter(
+                name='id',
+                type=int,
+                location=OpenApiParameter.QUERY,
+                required=True,
+                description='The ID of the help request',
+            ),
+        ],
+        summary='Retrieve a help request',
+    )
     def retrieve(self, request, *args, **kwargs):
         """Retrieve a help request"""
 
@@ -306,6 +335,9 @@ class HelpRequestViewSet(
             status=status.HTTP_200_OK
         )
     
+    @extend_schema(
+        summary='Create a new help request'
+    )
     def create(self, request):
         """Create a new help request"""
 
@@ -325,6 +357,9 @@ class HelpRequestViewSet(
         logger.error("Validation error's occured when creating a new help request: %s", serializer.errors)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    @extend_schema(
+        summary='Update a help request'
+    )
     def update(self, request, *args, **kwargs):
         """Update the help request"""
 
@@ -345,6 +380,9 @@ class HelpRequestViewSet(
         helprequest.update(request.data, partial=True)
         return Response({'detail': 'Help request updated.'}, status=status.HTTP_200_OK)
 
+    @extend_schema(
+        summary='Accept the help request'
+    )
     @action(detail=True, methods=['post'])
     def complete(self, request, id=None):
         """Complete the help request"""
