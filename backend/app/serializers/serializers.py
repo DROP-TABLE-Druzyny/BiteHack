@@ -4,7 +4,6 @@ from django.contrib.auth import models as auth_models
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
 
-from ..models.models import Profile
 from ..models.models import LocalEvent
 
 logger = logging.getLogger(__name__)
@@ -35,19 +34,6 @@ class UserSerializer(serializers.ModelSerializer):
         )
 
         return user
-
-class ProfileSerializer(serializers.ModelSerializer):
-    """Model serializer for Profile model"""
-
-    username = serializers.CharField(source='user.username', read_only=True)
-    avatar = serializers.ImageField(allow_null=True, required=False)
-    bio = serializers.CharField(max_length=500, allow_blank=True, required=False)
-    joined = serializers.DateTimeField(read_only=True, required=False)
-
-    class Meta:
-        model = Profile
-        fields = ['id', 'username', 'avatar', 'bio', 'joined']
-        read_only_fields = ['id', 'username', 'joined']
 
 class LocalEventSerializer(serializers.ModelSerializer):
     """Model serializer for LocalEvent model"""

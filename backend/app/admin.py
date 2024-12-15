@@ -1,9 +1,11 @@
 from rest_framework import serializers
 from django.contrib import admin
-from django.core.exceptions import ValidationError
 
 from .models.models import LocalEvent
 from .serializers.serializers import LocalEventSerializer
+
+from .models.vlntr_models import ReferalCodes
+from .serializers.vlntr_serializers import ReferalCodesSerializer
 
 @admin.register(LocalEvent)
 class LocalEventAdmin(admin.ModelAdmin):
@@ -21,6 +23,26 @@ class LocalEventAdmin(admin.ModelAdmin):
             event.save()
         
         serializer = LocalEventSerializer(data=form.cleaned_data)
+
+        if serializer.is_valid():
+            serializer.save()
+        else:
+            raise serializers.ValidationError(serializer.errors)
+        
+@admin.register(ReferalCodes)
+class ReferalCodesAdmin(admin.ModelAdmin):
+    list_display = ['name', 'code']
+    search_fields = ['name','code']
+    ordering = ['name',]
+
+    def save_model(self, request, obj, form, change):
+        if ReferalCodes.objects.filter(code=form.cleaned_data['code']).exists():
+            referal_code = ReferalCodes.objects.get(code=form.cleaned_data['code'])
+            for field, value in form.cleaned_data.items():
+                setattr(referal_code, field, value)
+            referal_code.save()
+        
+        serializer = ReferalCodesSerializer(data=form.cleaned_data)
 
         if serializer.is_valid():
             serializer.save()
