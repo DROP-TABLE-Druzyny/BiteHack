@@ -42,10 +42,6 @@ const Page = () => {
     setSelectedTile(value);
   };
 
-  const handleTimeDropdownChange = (value: string) => {
-    setTimeDropdownValue(value);
-  };
-
   const handleLocateClick = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
