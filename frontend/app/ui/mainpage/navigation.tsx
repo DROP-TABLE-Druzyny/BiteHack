@@ -19,10 +19,11 @@ const Navigation: React.FC = () => {
 
   const [items, setItems] = useState<NavItemProps[]>([
     { href: '/zdrowie', icon: HeartIcon, label: 'Zdrowie', radius: 60},
-    { href: '/aktywnosc', icon: MapIcon, label: 'Wydarzenia', radius: 60},
+    { href: '/informacje', icon: InformationCircleIcon, label: 'Informacje', radius: 60 },
     { href: '/pomocnik', icon: UserGroupIcon, label: 'Pomocnik', radius: 60 },
     { href: '/wyszukiwanie', icon: Search, label: 'Wyszukiwarka', radius: 60},
-    { href: '/informacje', icon: InformationCircleIcon, label: 'Informacje', radius: 60 },
+    { href: '/aktywnosc', icon: MapIcon, label: 'Wydarzenia', radius: 60},
+
   ]);
 
   const getPosition = (radius: number, angle: number, dist: number) => {
