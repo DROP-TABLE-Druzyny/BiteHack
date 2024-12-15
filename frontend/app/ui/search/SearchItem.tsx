@@ -1,4 +1,6 @@
+import { LinkPreview } from '@/components/ui/link-preview'
 import { SearchItem } from '@/services/Search'
+import { Star } from 'lucide-react'
 import React from 'react'
 
 interface SearchItemsProps
@@ -6,15 +8,25 @@ interface SearchItemsProps
     item: SearchItem
 }
 export default function SearchResult({ item }: SearchItemsProps) {
+  function OnStar(event: React.MouseEvent)
+  {
+    event.stopPropagation();
+    event.preventDefault();
+    console.log("TEST")
+  }
   return (
-    <a 
-    href={item.url} target='_blank'
-    rel='noopener noreferrer'>
-    <div className='p-4 border border-gray-300 rounded-lg mb-2 active:bg-amber-400 hover:bg-amber-500 transition-colors ease-in-out duration-1000'>
-    
-      <h3 className='text-lg font-bold'>{item.title}</h3>
-      <p>{item.desc}</p>
-    </div>
-    </a>
+    <LinkPreview url={item.url}>
+      <div className='p-4 border border-gray-300 rounded-lg mb-2 active:bg-amber-400 hover:bg-gray-200 transition-colors ease-in-out duration-1000'>
+        <div className='flex justify-between'>
+          <h3 className='text-lg font-bold'>{item.title}</h3>
+          <div className='p-2 hover:bg-amber-400 rounded-full transition ease-in-out duration-500'>
+            <Star onClick={OnStar} size={32}/>
+          </div>
+          
+        </div>
+        
+        <p>{item.desc}</p>
+      </div>
+    </LinkPreview>
   )
 }

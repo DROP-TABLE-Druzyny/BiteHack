@@ -5,6 +5,11 @@ import dotenv from 'dotenv';
 dotenv.config({ path: './frontend/local.env' });
 
 const nextConfig: NextConfig = {
+  images: {
+    domains: [
+      "api.microlink.io", // Microlink Image Preview
+    ],
+  },
   env: {
     REACT_APP_WEATHER_API_KEY: process.env.REACT_APP_WEATHER_API_KEY,
   },
