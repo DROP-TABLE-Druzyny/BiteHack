@@ -88,25 +88,25 @@ export default function Page() {
     <div className={`mx-[10%] flex flex-col justify-center`}>
       <div
         className={`w-full flex flex-col items-center justify-center transition-all duration-500 ease-in-out ${
-          showResults ? "mt-8" : "mt-[25%]"
+          showResults ? "md:mt-8 mt-2" : "md:mt-[25%] mt-2"
         }`}
       >
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center md:mt-0 mt-4">
           <Link
             href="/"
             className="p-2 mb-8 mr-4 bg-amber-600 border-1 border-white rounded-full shadow-lg text-3xl text-white drop-shadow-md font-bold"
           >
-            <ArrowLeftIcon className="w-14 h-14" />
+            <ArrowLeftIcon className="md:w-14 md:h-14 w-12 h-12" />
           </Link>
-          <h1 className="p-4 flex gap-2 items-center text-white text-4xl mb-8 font-extrabold bg-amber-600 border-white rounded-full shadow-lg drop-shadow-md">
+          <h1 className="p-4 flex gap-2 items-center text-white md:text-4xl text-2xl mb-8 font-extrabold bg-amber-600 border-white rounded-full shadow-lg drop-shadow-md">
             Wyszukiwarka
-            <Search size={32} />
+            <Search className="md:w-8 md:h-8 w-6 h-6" />
           </h1>
         </div>
 
         <Input
           onInput={SearchItem}
-          className="lg:2text-xl md:text-2xl sm:text-lg w-[700px] h-14 px-3 py-2 border-amber-600 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-full bg-amber-600 placeholder:text-white placeholder:opacity-80 text-white border-2"
+          className="lg:2text-xl md:text-2xl sm:text-lg w-full h-14 px-3 md:py-2 border-amber-600 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-full bg-amber-600 placeholder:text-white placeholder:opacity-80 text-white border-2"
           placeholder="Wpisz tutaj co chcesz znaleźć"
         />
       </div>
