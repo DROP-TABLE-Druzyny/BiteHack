@@ -96,7 +96,7 @@ const Page = () => {
   return (
     <div className="flex min-h-screen p-8 w-full justify-center">
       <main className="flex flex-col items-center">
-        <Header text="Prośba" backUrl="/" />
+        <Header text="Prośba" backUrl="/pomocnik" />
 
         <form
           className="flex flex-col items-center mt-2"
