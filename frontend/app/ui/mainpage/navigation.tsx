@@ -133,7 +133,7 @@ const Navigation: React.FC = () => {
       </div>
       <div className='mt-12 flex flex-col md:hidden'>
       {items.map((item) => (
-        <a href={item.href}>
+        <a href={item.href} key={item.href}>
           <div className='p-4 flex gap-2 items-center text-white text-4xl mb-8 font-extrabold bg-amber-600 border-white rounded-full shadow-lg drop-shadow-md'>
             <item.icon className={`w-6 h-6 text-white`} />
             {item.label}
@@ -141,7 +141,7 @@ const Navigation: React.FC = () => {
         </a>
         ))}
         {userItems.map((item) => (
-          <a href={item.href}>
+          <a href={item.href} key={item.href}>
           <div className='p-4 flex gap-2 items-center text-white text-4xl mb-8 font-extrabold bg-cyan-500 border-white rounded-full shadow-lg drop-shadow-md'>
             <item.icon className={`w-6 h-6 text-white`} />
             {item.label}
