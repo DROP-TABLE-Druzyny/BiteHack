@@ -92,19 +92,22 @@ const Page = () => {
       accepted_by: null,
       completed: false,
     });
-    router.push('/pomocnik');
+    router.push("/pomocnik");
   };
 
   return (
     <div className="flex min-h-screen p-8 w-full justify-center">
       <main className="flex flex-col items-center">
-        <Header text="Prośba" backUrl="/pomocnik" />
+        <Header text="Tworzenie prośby" backUrl="/pomocnik" />
 
         <form
           className="flex flex-col items-center mt-2"
           action="/your-form-action-url"
           onSubmit={handleSubmit}
         >
+          <label className="text-2xl text-center">
+            Kliknij kafelek z odpowiednim rodzajem prośby: 
+            </label>
           <div className="grid grid-cols-3 md:grid-cols-3 gap-4 mt-8">
             {tilesData.map((tileData, idx) => (
               <RequestTypeTile
@@ -117,38 +120,66 @@ const Page = () => {
           </div>
 
           <div
-            className={clsx("mt-16 transition-opacity duration-500", {
+            className={clsx("mt-12 transition-opacity duration-500 flex flex-col items-center justify-center", {
               "opacity-100": selectedTile !== null,
               "opacity-0": selectedTile === null,
             })}
           >
+            <label className="text-2xl text-center mb-2">
+              Kliknij przycisk aby wybrać jak pilna jest prośba: 
+            </label>
             <TimeDropdown onChange={handleTimeDropdownChange} />
           </div>
+          
+          <div className={clsx(
+                "mt-8 transition-opacity duration-500 flex flex-col items-center justify-center",
+                {
+                  "opacity-100":
+                    timeDropdownValue !== "" && selectedTile !== null,
+                  "opacity-0": !(
+                    timeDropdownValue !== "" && selectedTile !== null
+                  ),
+                })}>
+ 
+            <label className="text-2xl text-center mb-2">
+              Kliknij przycisk abyśmy wiedzieli gdzie jesteś: 
+            </label>
+            <Button
+              type="button"
+              label="Lokalizuj"
+              className={clsx(
+                "text-3xl font-semibold py-4 pr-12 pl-12 transition-opacity duration-500",
+              )}
+              onClick={handleLocateClick}
+            />
+          </div>
 
-          <Button
-            type="button"
-            label="Lokalizuj"
-            className={clsx(
-              "mt-20 text-3xl font-semibold py-4 pr-12 pl-12 transition-opacity duration-500",
-              {
-                "opacity-100": (timeDropdownValue !== "" && selectedTile !== null),
-                "opacity-0": !(timeDropdownValue !== "" && selectedTile !== null),
-              }
-            )}
-            onClick={handleLocateClick}
-          />
-
-          <Button
-            type="submit"
-            label="Dodaj prośbę"
-            className={clsx(
-              "mt-4 text-3xl font-semibold px-8 py-4 transition-opacity duration-1000",
-              {
-                "opacity-100": (isLocateButtonClicked !== "" && timeDropdownValue !== "" && selectedTile !== null),
-                "opacity-0": !(isLocateButtonClicked !== "" && timeDropdownValue !== "" && selectedTile !== null),
-              }
-            )}
-          />
+          <div className={clsx(
+                "mt-4 transition-opacity duration-1000 flex flex-col items-center justify-center",
+                {
+                  "opacity-100":
+                    isLocateButtonClicked !== "" &&
+                    timeDropdownValue !== "" &&
+                    selectedTile !== null,
+                  "opacity-0": !(
+                    isLocateButtonClicked !== "" &&
+                    timeDropdownValue !== "" &&
+                    selectedTile !== null
+                  ),
+                }
+              )}>
+            
+          <label className="text-2xl text-center mb-2">
+            Kliknij przycisk aby wysłać prośbę: 
+          </label>
+            <Button
+              type="submit" 
+              label="Dodaj prośbę"
+              className={clsx(
+                "text-3xl font-semibold px-8 py-4 transition-opacity duration-1000",
+              )}
+            />
+          </div>
         </form>
       </main>
     </div>
