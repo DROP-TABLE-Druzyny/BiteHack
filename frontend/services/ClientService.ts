@@ -15,6 +15,7 @@ export interface IClientService {
     updateName(name: string): Promise<void>;
     isLoggedIn(): Promise<boolean>;
     getClientData(): Promise<client>;
+    updatePins(pins: string[]): Promise<void>;
 }
 
 export class ClientDjangoService extends ApiService implements IClientService {
@@ -73,7 +74,7 @@ export class ClientDjangoService extends ApiService implements IClientService {
     }
     public async updatePins(pins: string[]): Promise<void> {
         // TODO: Replace any with pin type
-        await this.patch<void, {pins: any[]}>('client/', { 'pins': pins }, {
+        await this.patch<void, {"custom_pins": any[]}>('client/', { 'custom_pins': pins }, {
             headers: {
                 'Authorization': `Bearer ${this._retrieveToken()}`
             }
