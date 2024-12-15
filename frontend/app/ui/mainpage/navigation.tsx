@@ -11,11 +11,12 @@ export interface NavItemProps {
   label: string;
   radius: number;
   style?: React.CSSProperties
+  bgcolor?: string
 }
 
 const Navigation: React.FC = () => {
-  const dist_main = 90;
-  //const dist_far = 120;
+  const dist_main = 70;
+  const dist_far = 250;
 
   const [items, ] = useState<NavItemProps[]>([
     { href: '/zdrowie', icon: HeartIcon, label: 'Zdrowie', radius: 90},
@@ -23,6 +24,14 @@ const Navigation: React.FC = () => {
     { href: '/pomocnik', icon: UserGroupIcon, label: 'Pomocnik', radius: 90 },
     { href: '/wyszukiwanie', icon: Search, label: 'Wyszukiwarka', radius: 90},
     { href: '/aktywnosc', icon: MapIcon, label: 'Wydarzenia', radius: 90},
+  ]);
+
+  const [userItems, setUserItems] = useState<NavItemProps[]>([
+    { href: '/zdrowie', icon: HeartIcon, label: 'Zdrowie', radius: 50},
+    { href: '/informacje', icon: InformationCircleIcon, label: 'Informacje', radius: 50 },
+    { href: '/pomocnik', icon: UserGroupIcon, label: 'Pomocnik', radius: 50 },
+    { href: '/pomocnik', icon: UserGroupIcon, label: 'Pomocnik', radius: 50 },
+    { href: '/pomocnik', icon: UserGroupIcon, label: 'Pomocnik', radius: 50 },
   ]);
 
   const getPosition = (radius: number, angle: number, dist: number) => {
@@ -50,6 +59,29 @@ const Navigation: React.FC = () => {
           icon={item.icon}
           label={item.label}
           radius={item.radius}
+          bgcolor={'bg-amber-600  hover:bg-amber-700'}
+          style={{
+            position: 'absolute',
+            left: `calc(50% + ${x}px)`,
+            top: `calc(50% + ${y}px)`,
+            transform: 'translate(-50%, -50%)',
+          }}
+        />
+      );
+    }
+
+    for (let i = 0; i < userItems.length; i++) {
+      const item = userItems[i];
+      const { x, y } = getPosition(item.radius, (360/userItems.length)*i, dist_far);
+      
+      navItems.push(
+        <NavItem
+          key={item.href}
+          href={item.href}
+          icon={item.icon}
+          label={item.label}
+          radius={item.radius}
+          bgcolor='bg-cyan-500'
           style={{
             position: 'absolute',
             left: `calc(50% + ${x}px)`,
