@@ -128,16 +128,19 @@ const Page = () => {
               "opacity-100": selectedTile !== null,
               "opacity-0": selectedTile === null,
             })}
+            aria-live="polite"
           >
             <label
               className={clsx("text-2xl text-center mb-2", {
                 "invisible": timeDropdownValue !== "",
               })}
+              aria-hidden={timeDropdownValue !== ""}
             >
               Kliknij przycisk aby wybrać jak pilna jest prośba:
             </label>
             <TimeDropdown
               onChange={setTimeDropdownValue}
+              aria-label="Dropdown wyboru czasu"
             />
           </div>
           
@@ -149,7 +152,10 @@ const Page = () => {
                   "opacity-0": !(
                     timeDropdownValue !== "" && selectedTile !== null
                   ),
-                })}>
+                }
+              )}
+              aria-live="polite"
+          >
  
             <label className={clsx("text-2xl text-center mb-2", {
                 "invisible": isLocateButtonClicked !== "",
