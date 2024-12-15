@@ -131,8 +131,8 @@ const Page = () => {
             className={clsx(
               "mt-20 text-3xl font-semibold py-4 pr-12 pl-12 transition-opacity duration-500",
               {
-                "opacity-100": timeDropdownValue !== null,
-                "opacity-0": timeDropdownValue === null,
+                "opacity-100": (timeDropdownValue !== "" && selectedTile !== null),
+                "opacity-0": !(timeDropdownValue !== "" && selectedTile !== null),
               }
             )}
             onClick={handleLocateClick}
@@ -144,8 +144,8 @@ const Page = () => {
             className={clsx(
               "mt-4 text-3xl font-semibold px-8 py-4 transition-opacity duration-1000",
               {
-                "opacity-100": isLocateButtonClicked !== "",
-                "opacity-0": isLocateButtonClicked === "",
+                "opacity-100": (isLocateButtonClicked !== "" && timeDropdownValue !== "" && selectedTile !== null),
+                "opacity-0": !(isLocateButtonClicked !== "" && timeDropdownValue !== "" && selectedTile !== null),
               }
             )}
           />
