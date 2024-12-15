@@ -10,3 +10,4 @@ import {
 
 export const publicService = new PublicDjangoService();
 export const clientService = new ClientDjangoService();
+export const volounteerService = new ClientDjangoService();

@@ -256,7 +256,11 @@ class HelpRequestViewSet(
     def list(self, request):
         """List all help requests"""
 
-        helprequests = self.get_queryset()
+        queryset = self.get_queryset()
+        queryset.filter(completed=False)
+        queryset.order_by('created')
+        
+        helprequests = queryset
 
         return Response(
             HelpRequestSerializer(helprequests, many=True).data,

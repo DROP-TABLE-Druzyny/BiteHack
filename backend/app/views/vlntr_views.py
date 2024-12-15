@@ -114,6 +114,7 @@ class VolounteerViewSet(
             ),
         ]
     )
+    @action(detail=False, methods=['POST'], url_path='login')
     def login(self, request):
         """Method to login a volounteer"""
 
